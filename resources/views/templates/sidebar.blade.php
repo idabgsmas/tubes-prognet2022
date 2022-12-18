@@ -47,6 +47,13 @@
                                         <span class="nk-menu-text">Data IKS Grup Komponen</span>
                                     </a>
                                 </li>
+                                <!-- .nk-menu-item -->
+                                <li class="nk-menu-item">
+                                    <a href="{{URL('/crud5')}}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
+                                        <span class="nk-menu-text">Data Detail IKS Grup Komponen</span>
+                                    </a>
+                                </li>
 
                                 <!-- .nk-menu-header -->
                                 <li class="nk-menu-heading">

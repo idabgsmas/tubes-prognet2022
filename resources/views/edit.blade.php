@@ -80,7 +80,7 @@
                 @foreach ($penjamin as $jaminan)
                   <option value="{{ $jaminan->id }}">{{ $jaminan->nama }}</option>
                 @endforeach
-              </select>
+            </select>
         </div>
         <div class="mb-3">
             <label for="tipe_id" class="form-label">Tipe IKS</label>

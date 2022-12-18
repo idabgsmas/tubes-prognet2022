@@ -3,6 +3,8 @@
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\Crud3Controller;
+use App\Http\Controllers\Crud4Controller;
+use App\Http\Controllers\Crud5Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,3 +58,29 @@ Route::post('crud3/update3/{id}',[Crud3Controller::class,'update'])->name('crud3
 
 Route::delete('/crud3/{id}',[Crud3Controller::class,'deleteData'])->name('crud3.delete');
 Route::post('/crud3/listData3',[Crud3Controller::class,'listData'])->name('crud3.listData');
+
+
+// Routes untuk M_IKS_GKOMPONEN
+Route::get('/crud4',[Crud4Controller::class,'index'])->name('crud4.list');
+
+Route::get('/crud4/create4',[Crud4Controller::class,'create'])->name('crud4.create');
+Route::post('/crud4/store4',[Crud4Controller::class,'store'])->name('crud4.store');
+
+Route::get('/crud4/{id}/edit4',[Crud4Controller::class,'edit'])->name('crud4.edit');
+Route::post('crud4/update4/{id}',[Crud4Controller::class,'update'])->name('crud4.update');
+
+Route::delete('/crud4/{id}',[Crud4Controller::class,'deleteData'])->name('crud4.delete');
+Route::post('/crud4/listData4',[Crud4Controller::class,'listData'])->name('crud4.listData');
+
+
+// Routes untuk M_IKS_GKOMPONEN_DETAIL
+Route::get('/crud5',[Crud5Controller::class,'index'])->name('crud5.list');
+
+Route::get('/crud5/create5',[Crud5Controller::class,'create'])->name('crud5.create');
+Route::post('/crud5/store5',[Crud5Controller::class,'store'])->name('crud5.store');
+
+Route::get('/crud5/{id}/edit5',[Crud5Controller::class,'edit'])->name('crud5.edit');
+Route::post('crud5/update5/{id}',[Crud5Controller::class,'update'])->name('crud5.update');
+
+Route::delete('/crud5/{id}',[Crud5Controller::class,'deleteData'])->name('crud5.delete');
+Route::post('/crud5/listData5',[Crud5Controller::class,'listData'])->name('crud5.listData');

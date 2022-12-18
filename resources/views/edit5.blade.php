@@ -5,7 +5,6 @@
 
 @endsection
 @section('content')
-
 <div class="nk-fmg-body-head d-none d-lg-flex">
     <div class="nk-fmg-search">
         <!-- <em class="icon ni ni-search"></em> -->
@@ -18,9 +17,10 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('crud3.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('crud5.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
+
 </div>
 <div class="row gy-3 d-none" id="loaderspin">
     <div class="col-md-12">
@@ -56,60 +56,64 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                Form Input Data Penjamin IKS
+                Form Edit Data Detail Group Komponen IKS "{{ $data->gkomponen_detail }}"
             </div>
         </div>
     </div>
 <!-- </div> -->
-<form method="POST" action="/crud3/store3" enctype="multipart/form-data">
-    @csrf
 
+<form method="POST" action="/crud5/update5/{{ $data->id }}" enctype="multipart/form-data">
+    @csrf   
         <div class="mb-3">
-            <label for="kode" class="form-label">Kode</label>
-            <input name="kode" type="number" class="form-control" id="kode" aria-describedby="kode">
+        <input type="hidden" value="{{ $data->id }}" id="id">
+            <label for="gkomponen_id" class="form-label">ID Group Komponen</label>
+            <select class="custom-select" id="gkomponen_id" name="gkomponen_id" aria-describedby="gkomponen_id" required>
+                <option value selected disabled>{{ $data->gkomponen->group }}</option>
+                @foreach ($gkomponen as $komponen)
+                  <option value="{{ $komponen->id }}">{{ $komponen->group }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input name="nama" type="text" class="form-control" id="nama" aria-describedby="nama">
-        </div>
-        <div class="mb-3">
-            <label for="prefix_antrean" class="form-label">Prefix Antrean</label>
-            <input name="prefix_antrean" type="text" class="form-control" id="prefix_antrean" aria-describedby="prefix_antrean">
+            <label for="gkomponen_detail" class="form-label">Detail Group Komponen</label>
+            <input name="gkomponen_detail" type="text" value="{{ $data['gkomponen_detail'] }}"class="form-control" id="gkomponen_detail" aria-describedby="group">
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
+        <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a>
 </form>
+
 @endsection
+
 @push('script')
 <script>
-
-function store(){
+    
+function update(id){
     // buttonsmdisable(elm);
     CustomSwal.fire({
         icon:'question',
-        text: 'Data Sudah Benar?',
+        text: 'Edit data '+$("#gkomponen_detail").val()+' ?',
         showCancelButton: true,
-        confirmButtonText: 'Submit',
+        confirmButtonText: 'Simpan',
         cancelButtonText: 'Batal',
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('/crud3/store3')}}/",
+                url:"{{url('crud5/update5')}}/"+id,
                 data:{
                     _method:"POST",
                     _token:"{{csrf_token()}}",
-                    kode:$("#kode").val(),
-                    nama:$("#nama").val(),
-                    prefix_antrean:$("#prefix_antrean").val()
+                    id:$("#id").val(),
+                    gkomponen_id:$("#gkomponen_id").val(),
+                    gkomponen_detail:$("#gkomponen_detail").val()
                 },
                 type:"POST",
                 dataType:"JSON",
                 success:function(data){
                     if(data.success == 1){
                         CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('crud3') }}");
+                        window.location.replace("{{ url('crud5') }}");
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
@@ -120,11 +124,8 @@ function store(){
                 }
             });
         }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-            console.log(error.XMLHttpRequest);
         }
     });
 }
 </script>
 @endpush
-

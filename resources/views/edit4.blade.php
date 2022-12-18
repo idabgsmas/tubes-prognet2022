@@ -5,7 +5,6 @@
 
 @endsection
 @section('content')
-
 <div class="nk-fmg-body-head d-none d-lg-flex">
     <div class="nk-fmg-search">
         <!-- <em class="icon ni ni-search"></em> -->
@@ -18,9 +17,10 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('crud3.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('crud4.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
+
 </div>
 <div class="row gy-3 d-none" id="loaderspin">
     <div class="col-md-12">
@@ -56,60 +56,57 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                Form Input Data Penjamin IKS
+                Form Edit Data Group Komponen IKS "{{ $data->group }}"
             </div>
         </div>
     </div>
 <!-- </div> -->
-<form method="POST" action="/crud3/store3" enctype="multipart/form-data">
-    @csrf
 
+<form method="POST" action="/crud4/update4/{{ $data->id }}" enctype="multipart/form-data">
+    @csrf   
         <div class="mb-3">
-            <label for="kode" class="form-label">Kode</label>
-            <input name="kode" type="number" class="form-control" id="kode" aria-describedby="kode">
+            <label for="id" class="form-label">ID</label>
+            <input name="id" type="number" value="{{ $data['id'] }}" class="form-control" id="id" aria-describedby="id">
         </div>
         <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input name="nama" type="text" class="form-control" id="nama" aria-describedby="nama">
-        </div>
-        <div class="mb-3">
-            <label for="prefix_antrean" class="form-label">Prefix Antrean</label>
-            <input name="prefix_antrean" type="text" class="form-control" id="prefix_antrean" aria-describedby="prefix_antrean">
+            <label for="group" class="form-label">Nama Group</label>
+            <input name="group" type="text" value="{{ $data['group'] }}"class="form-control" id="group" aria-describedby="group">
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
+        <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a>
 </form>
+
 @endsection
+
 @push('script')
 <script>
-
-function store(){
+    
+function update(id){
     // buttonsmdisable(elm);
     CustomSwal.fire({
         icon:'question',
-        text: 'Data Sudah Benar?',
+        text: 'Edit data '+$("#group").val()+' ?',
         showCancelButton: true,
-        confirmButtonText: 'Submit',
+        confirmButtonText: 'Simpan',
         cancelButtonText: 'Batal',
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('/crud3/store3')}}/",
+                url:"{{url('crud4/update4')}}/"+id,
                 data:{
                     _method:"POST",
                     _token:"{{csrf_token()}}",
-                    kode:$("#kode").val(),
-                    nama:$("#nama").val(),
-                    prefix_antrean:$("#prefix_antrean").val()
+                    id:$("#id").val(),
+                    group:$("#group").val()
                 },
                 type:"POST",
                 dataType:"JSON",
                 success:function(data){
                     if(data.success == 1){
                         CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('crud3') }}");
+                        window.location.replace("{{ url('crud4') }}");
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
@@ -120,11 +117,8 @@ function store(){
                 }
             });
         }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-            console.log(error.XMLHttpRequest);
         }
     });
 }
 </script>
 @endpush
-
