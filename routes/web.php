@@ -21,7 +21,7 @@ Route::get('/',function(){
     return redirect('/crud');
 });
 
-// Routes untuk M_IKS
+// Routes 1 untuk M_IKS
 Route::get('/crud',[CrudController::class,'index'])->name('crud.list');
 
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
@@ -34,7 +34,7 @@ Route::delete('/crud/{id}',[CrudController::class,'deleteData'])->name('crud.del
 Route::post('/crud/listData',[CrudController::class,'listData'])->name('crud.listData');
 
 
-// Routes untuk M_IKS_TIPE
+// Routes 2 untuk M_IKS_TIPE
 Route::get('/crud2',[Crud2Controller::class,'index'])->name('crud2.list');
 
 Route::get('/crud2/create2',[Crud2Controller::class,'create'])->name('crud2.create');
@@ -47,7 +47,7 @@ Route::delete('/crud2/{id}',[Crud2Controller::class,'deleteData'])->name('crud2.
 Route::post('/crud2/listData2',[Crud2Controller::class,'listData'])->name('crud2.listData');
 
 
-// Routes untuk M_PENJAMIN
+// Routes 3 untuk M_PENJAMIN
 Route::get('/crud3',[Crud3Controller::class,'index'])->name('crud3.list');
 
 Route::get('/crud3/create3',[Crud3Controller::class,'create'])->name('crud3.create');
@@ -60,7 +60,7 @@ Route::delete('/crud3/{id}',[Crud3Controller::class,'deleteData'])->name('crud3.
 Route::post('/crud3/listData3',[Crud3Controller::class,'listData'])->name('crud3.listData');
 
 
-// Routes untuk M_IKS_GKOMPONEN
+// Routes 4 untuk M_IKS_GKOMPONEN
 Route::get('/crud4',[Crud4Controller::class,'index'])->name('crud4.list');
 
 Route::get('/crud4/create4',[Crud4Controller::class,'create'])->name('crud4.create');
@@ -73,7 +73,7 @@ Route::delete('/crud4/{id}',[Crud4Controller::class,'deleteData'])->name('crud4.
 Route::post('/crud4/listData4',[Crud4Controller::class,'listData'])->name('crud4.listData');
 
 
-// Routes untuk M_IKS_GKOMPONEN_DETAIL
+// Routes 5 untuk M_IKS_GKOMPONEN_DETAIL
 Route::get('/crud5',[Crud5Controller::class,'index'])->name('crud5.list');
 
 Route::get('/crud5/create5',[Crud5Controller::class,'create'])->name('crud5.create');
