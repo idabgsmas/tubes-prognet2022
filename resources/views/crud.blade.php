@@ -98,15 +98,15 @@ $(document).ready(function() {
                 class: 'text-left'
             },
             {
-                data: 'penjamin_id',
-                name: 'penjamin_id',
+                data: 'list_penjamin.nama',
+                name: 'list_penjamin.nama',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
             {
-                data: 'tipe_id',
-                name: 'tipe_id',
+                data: 'list_iks_tipe.nama',
+                name: 'list_iks_tipe.nama',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'

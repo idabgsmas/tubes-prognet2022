@@ -48,7 +48,7 @@
                             <th width="1%">No.</th>
                             <th width="10%">Kode</th>
                             <th width="10%">Nama</th>
-                            <th width="10%">Status_aktif</th>
+                            <th width="10%">Status Aktif</th>
                             <th width="10%">Aksi</th>
                         </thead>
                         <tbody></tbody>

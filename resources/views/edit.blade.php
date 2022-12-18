@@ -76,7 +76,7 @@
         <div class="mb-3">
             <label for="penjamin_id" class="form-label">Jaminan</label>
             <select class="custom-select" id="penjamin_id" name="penjamin_id" aria-describedby="penjamin_id" required>
-                <option value="{{ $data->list_penjamin->id }}" selected disabled>{{ $data->list_penjamin->nama }}</option>
+                <option selected disabled>{{ $data->list_penjamin->nama }}</option>
                 @foreach ($penjamin as $jaminan)
                   <option value="{{ $jaminan->id }}">{{ $jaminan->nama }}</option>
                 @endforeach

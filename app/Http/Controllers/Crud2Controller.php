@@ -26,7 +26,17 @@ class Crud2Controller extends Controller
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->kode}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-kode='{$data->kode}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
-                ->rawColumns(['aksi'])
+                ->editColumn('status_aktif',function($status)
+                {
+                    if($status->status_aktif == 0)
+                    {
+                        return '<button class="btn btn-danger btn-xs">Tidak Aktif</button>';
+                    }elseif($status->status_aktif == 1)
+                    {
+                        return '<button class="btn btn-success btn-xs">Aktif</button>';
+                    }
+                })
+                ->rawColumns(['aksi','status_aktif'])
                 ->make(true);
     }
 
