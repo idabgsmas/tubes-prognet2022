@@ -78,18 +78,18 @@
         <div class="mb-3">
             <label for="penjamin_id" class="form-label">Jaminan</label>
             <select class="custom-select" id="penjamin_id" name="penjamin_id" aria-describedby="penjamin_id" required>
-                <option selected disabled>{{ $data->list_penjamin->nama }}</option>
+                <option value="0" disabled>Pilih Jaminan</option>
                 @foreach ($penjamin as $jaminan)
-                  <option value="{{ $jaminan->id }}">{{ $jaminan->nama }}</option>
+                  <option value="{{ $jaminan->id }}" @if($data->penjamin_id===$jaminan->id) SELECTED @endif>{{ $jaminan->nama }}</option>
                 @endforeach
             </select>
         </div>
         <div class="mb-3">
             <label for="tipe_id" class="form-label">Tipe IKS</label>
             <select class="custom-select" id="tipe_id" name="tipe_id" aria-describedby="tipe_id" required>
-                <option selected disabled>{{ $data->list_iks_tipe->nama }}</option>
+                <option disabled value="0">Pilih Tipe IKS</option>
                 @foreach ($tipe_iks as $iks_tipe)
-                  <option value="{{ $iks_tipe->id }}">{{ $iks_tipe->nama }}</option>
+                  <option value="{{ $iks_tipe->id }}" @if($data->tipe_id===$iks_tipe->id) SELECTED @endif>{{ $iks_tipe->nama }}</option>
                 @endforeach
               </select>
         </div>
