@@ -5,6 +5,7 @@ use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\Crud3Controller;
 use App\Http\Controllers\Crud4Controller;
 use App\Http\Controllers\Crud5Controller;
+use App\Http\Controllers\Crud6Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,3 +85,15 @@ Route::post('crud5/update5/{id}',[Crud5Controller::class,'update'])->name('crud5
 
 Route::delete('/crud5/{id}',[Crud5Controller::class,'deleteData'])->name('crud5.delete');
 Route::post('/crud5/listData5',[Crud5Controller::class,'listData'])->name('crud5.listData');
+
+// Routes 6 untuk M_PROVIDER
+Route::get('/crud6',[Crud6Controller::class,'index'])->name('crud6.list');
+
+Route::get('/crud6/create6',[Crud6Controller::class,'create'])->name('crud6.create');
+Route::post('/crud6/store6',[Crud6Controller::class,'store'])->name('crud6.store');
+
+Route::get('/crud6/{id}/edit6',[Crud6Controller::class,'edit'])->name('crud6.edit');
+Route::post('crud6/update6/{id}',[Crud6Controller::class,'update'])->name('crud6.update');
+
+Route::delete('/crud6/{id}',[Crud6Controller::class,'deleteData'])->name('crud6.delete');
+Route::post('/crud6/listData6',[Crud6Controller::class,'listData'])->name('crud6.listData');

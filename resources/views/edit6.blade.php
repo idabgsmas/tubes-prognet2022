@@ -1,4 +1,4 @@
-<!-- INI HALAMAN UTAMA UNTUK EDIT DATA TABEL M_IKS_GKOMPONEN_DETAIL -->
+<!-- INI HALAMAN UTAMA UNTUK EDIT DATA TABEL M_PROVIDER -->
 
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
@@ -19,7 +19,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('crud5.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('crud6.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 
@@ -58,27 +58,18 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                Form Edit Data Detail Group Komponen IKS "{{ $data->gkomponen_detail }}"
+                Form Edit Data Provider IKS "{{ $data->provider }}"
             </div>
         </div>
     </div>
 <!-- </div> -->
 
-<form method="POST" action="/crud5/update5/{{ $data->id }}" enctype="multipart/form-data">
+<form method="POST" action="/crud6/update6/{{ $data->id }}" enctype="multipart/form-data">
     @csrf   
+    <div class="mb-3">
         <div class="mb-3">
-        <input type="hidden" value="{{ $data->id }}" id="id">
-            <label for="gkomponen_id" class="form-label">ID Group Komponen</label>
-            <select class="custom-select" id="gkomponen_id" name="gkomponen_id" aria-describedby="gkomponen_id" required>
-                <option selected disabled>{{ $data->gkomponen->group }}</option>
-                @foreach ($gkomponen as $komponen)
-                  <option value="{{ $komponen->id }}">{{ $komponen->group }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="gkomponen_detail" class="form-label">Detail Group Komponen</label>
-            <input name="gkomponen_detail" type="text" value="{{ $data['gkomponen_detail'] }}"class="form-control" id="gkomponen_detail" aria-describedby="group">
+            <label for="provider" class="form-label">Provider</label>
+            <input name="provider" type="text" value="{{ $data['provider'] }}"class="form-control" id="provider" aria-describedby="provider">
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
@@ -94,7 +85,7 @@ function update(id){
     // buttonsmdisable(elm);
     CustomSwal.fire({
         icon:'question',
-        text: 'Edit data '+$("#gkomponen_detail").val()+' ?',
+        text: 'Edit data '+$("#provider").val()+' ?',
         showCancelButton: true,
         confirmButtonText: 'Simpan',
         cancelButtonText: 'Batal',
@@ -102,20 +93,18 @@ function update(id){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('crud5/update5')}}/"+id,
+                url:"{{url('crud6/update6')}}/"+id,
                 data:{
                     _method:"POST",
                     _token:"{{csrf_token()}}",
-                    id:$("#id").val(),
-                    gkomponen_id:$("#gkomponen_id").val(),
-                    gkomponen_detail:$("#gkomponen_detail").val()
+                    provider:$("#provider").val()
                 },
                 type:"POST",
                 dataType:"JSON",
                 success:function(data){
                     if(data.success == 1){
                         CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('crud5') }}");
+                        window.location.replace("{{ url('crud6') }}");
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
@@ -131,5 +120,3 @@ function update(id){
 }
 </script>
 @endpush
-
-<!-- coment  -->
