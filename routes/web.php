@@ -97,7 +97,7 @@ Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit')
 Route::post('trx2/update7/{id}',[Trx2Controller::class,'update'])->name('trx2.update');
 
 Route::delete('/trx2/{id}',[Trx2Controller::class,'deleteData'])->name('trx2.delete');
-Route::post('/trx2/listData7',[Trx2Controller::class,'listData'])->name('trx2.listData');
+Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.listData');
 
 // Routes 6 untuk M_PROVIDER
 Route::get('/crud6',[Crud6Controller::class,'index'])->name('crud6.list');
