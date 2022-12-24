@@ -61,7 +61,8 @@ class Crud5Controller extends Controller
         return $response;
     }  
 
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         $data = M_iks_gkomponen_detail::find($request->id);
         $icon = 'ni ni-dashlite';
         $subtitle = 'Edit Data Detail Group Komponen IKS';

@@ -88,17 +88,6 @@ Route::delete('/crud5/{id}',[Crud5Controller::class,'deleteData'])->name('crud5.
 Route::post('/crud5/listData5',[Crud5Controller::class,'listData'])->name('crud5.listData');
 
 // Routes 7 untuk T_KOOMPONEN_IKS
-Route::get('/trx2',[Trx2Controller::class,'index'])->name('trx2.list');
-
-Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
-Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
-
-Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit');
-Route::post('trx2/update7/{id}',[Trx2Controller::class,'update'])->name('trx2.update');
-
-Route::delete('/trx2/{id}',[Trx2Controller::class,'deleteData'])->name('trx2.delete');
-Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.listData');
-
 // Routes 6 untuk M_PROVIDER
 Route::get('/crud6',[Crud6Controller::class,'index'])->name('crud6.list');
 
@@ -110,3 +99,15 @@ Route::post('crud6/update6/{id}',[Crud6Controller::class,'update'])->name('crud6
 
 Route::delete('/crud6/{id}',[Crud6Controller::class,'deleteData'])->name('crud6.delete');
 Route::post('/crud6/listData6',[Crud6Controller::class,'listData'])->name('crud6.listData');
+
+// Routes  untuk T_KOOMPONEN_IKS
+Route::get('/trx2',[Trx2Controller::class,'index'])->name('trx2.list');
+
+Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
+Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
+
+Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit');
+Route::post('trx2/update7/{id}',[Trx2Controller::class,'update'])->name('trx2.update');
+
+Route::delete('/trx2/{id}',[Trx2Controller::class,'deleteData'])->name('trx2.delete');
+Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.listData');

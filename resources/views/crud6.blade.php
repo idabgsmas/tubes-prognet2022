@@ -48,7 +48,8 @@
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
-                            <th width="10%">Provider</th>
+                            <th width="10%">ID Provider</th>
+                            <th width="10%">Nama Provider</th>
                             <th width="10%">Aksi</th>
                         </thead>
                         <tbody></tbody>
@@ -79,6 +80,13 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },         
+            {
+                data: 'id',
+                name: 'id',
+                orderable: true,
+                searchable: true,
+                class: 'text-left'
+            },
             {
                 data: 'provider',
                 name: 'provider',

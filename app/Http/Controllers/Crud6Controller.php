@@ -58,7 +58,7 @@ class Crud6Controller extends Controller
         return $response;
     }
 
-    public function edit(M_Provider $request)
+    public function edit(Request $request)
     {
         $data = M_Provider::find($request->id);
         $icon = 'ni ni-dashlite';

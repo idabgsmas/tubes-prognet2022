@@ -68,7 +68,7 @@
     @csrf   
     <div class="mb-3">
         <div class="mb-3">
-            <label for="provider" class="form-label">Provider</label>
+            <label for="provider" class="form-label">Nama Provider</label>
             <input name="provider" type="text" value="{{ $data['provider'] }}"class="form-control" id="provider" aria-describedby="provider">
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->

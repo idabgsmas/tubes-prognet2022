@@ -58,7 +58,7 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                Form Input Data Penjamin IKS
+                Form Input Data Provider IKS
             </div>
         </div>
     </div>
@@ -66,12 +66,13 @@
 <form method="POST" action="/crud6/store6" enctype="multipart/form-data">
     @csrf
         <div class="mb-3">
-            <label for="provider" class="form-label">Provider</label>
+            <label for="provider" class="form-label">Nama Provider</label>
             <input name="provider" type="text" class="form-control" id="provider" aria-describedby="provider">
         </div>
+        <button type="reset" class="btn btn-danger">Kosongkan</button> 
         <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
-        <button type="reset" class="btn btn-danger">Kosongkan</button> 
+        
         
 </form>
 @endsection
