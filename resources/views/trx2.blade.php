@@ -13,7 +13,7 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('crud4.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            <a href="{{ route('trx2.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
         </div>
     </div>
 </div>
@@ -49,9 +49,11 @@
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
                             <th width="10%">ID</th>
+                            <th width="10%">IKS</th>
                             <th width="10%">Provider</th>
                             <th width="10%">Group Komponen</th>
                             <th width="10%">Group</th>
+                            <th width="10%">Aksi</th>
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -73,7 +75,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("crud4.listData") }}',
+            url: '{{ route("trx2.listData") }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
@@ -89,15 +91,22 @@ $(document).ready(function() {
                 class: 'text-left'
             },
             {
-                data: 'iks_provider_id',
-                name: 'Provider',
+                data: 'iks.nama',
+                name: 'iks.nama',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
             {
-                data: 'iks_gkomponenen_id',
-                name: 'iks_gkomponenen_id',
+                data: 'provider.provider',
+                name: 'provider.provider',
+                orderable: false,
+                searchable: false,
+                class: 'text-center'
+            },
+            {
+                data: 'iks_gkomponen_id',
+                name: 'iks_gkomponen_id',
                 orderable: false,
                 searchable: false,
                 class: 'text-center'
@@ -105,6 +114,13 @@ $(document).ready(function() {
             {
                 data: 'group',
                 name: 'group',
+                orderable: false,
+                searchable: false,
+                class: 'text-center'
+            },
+            {
+                data: 'aksi',
+                name: 'aksi',
                 orderable: false,
                 searchable: false,
                 class: 'text-center'
@@ -116,7 +132,7 @@ $(document).ready(function() {
 });
 
 
-function deleteData(id,group,elm){
+function deleteData(id,elm){
     console.log(elm);
     // buttonsmdisable(elm);
     CustomSwal.fire({
@@ -129,7 +145,7 @@ function deleteData(id,group,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('crud4')}}/"+id,
+                url:"{{url('trx2')}}/"+id,
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"
