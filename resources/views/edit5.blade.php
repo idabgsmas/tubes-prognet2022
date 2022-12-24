@@ -70,9 +70,9 @@
         <input type="hidden" value="{{ $data->id }}" id="id">
             <label for="gkomponen_id" class="form-label">ID Group Komponen</label>
             <select class="custom-select" id="gkomponen_id" name="gkomponen_id" aria-describedby="gkomponen_id" required>
-                <option selected disabled>{{ $data->gkomponen->group }}</option>
+                <option value="0" disabled>Pilih Group Komponen</option>
                 @foreach ($gkomponen as $komponen)
-                  <option value="{{ $komponen->id }}">{{ $komponen->group }}</option>
+                  <option value="{{ $komponen->id }}" @if($data->gkomponen_id===$komponen->id) SELECTED @endif>{{ $komponen->group }}</option>
                 @endforeach
             </select>
         </div>
