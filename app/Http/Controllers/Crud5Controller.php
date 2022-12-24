@@ -1,5 +1,7 @@
 <?php
 
+//INI CONTROLLER CRUD UNTUK TABEL M_IKS_GKOMPONEN_DETAIL
+
 namespace App\Http\Controllers;
 
 use App\Models\M_iks_gkomponen_detail;

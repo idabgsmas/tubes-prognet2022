@@ -1,3 +1,5 @@
+<!-- INI HALAMAN UTAMA UNTUK DATA TABEL M_IKS -->
+
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
 @extends('layouts.app')

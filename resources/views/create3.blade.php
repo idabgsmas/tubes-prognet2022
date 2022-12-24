@@ -1,3 +1,5 @@
+<!-- INI HALAMAN UTAMA UNTUK CREATE DATA TABEL M_PENJAMIN -->
+
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
 @extends('layouts.app')

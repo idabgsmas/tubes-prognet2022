@@ -1,5 +1,7 @@
 <?php
 
+//INI CONTROLLER CRUD UNTUK TABEL M_IKS
+
 namespace App\Http\Controllers;
 
 use App\Models\M_iks;

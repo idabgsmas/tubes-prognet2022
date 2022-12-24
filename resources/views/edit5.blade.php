@@ -1,3 +1,5 @@
+<!-- INI HALAMAN UTAMA UNTUK EDIT DATA TABEL M_IKS_GKOMPONEN_DETAIL -->
+
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
 @extends('layouts.app')
@@ -68,7 +70,7 @@
         <input type="hidden" value="{{ $data->id }}" id="id">
             <label for="gkomponen_id" class="form-label">ID Group Komponen</label>
             <select class="custom-select" id="gkomponen_id" name="gkomponen_id" aria-describedby="gkomponen_id" required>
-                <option value selected disabled>{{ $data->gkomponen->group }}</option>
+                <option selected disabled>{{ $data->gkomponen->group }}</option>
                 @foreach ($gkomponen as $komponen)
                   <option value="{{ $komponen->id }}">{{ $komponen->group }}</option>
                 @endforeach

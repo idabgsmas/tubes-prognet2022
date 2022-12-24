@@ -1,5 +1,7 @@
 <?php
 
+//INI CONTROLLER CRUD UNTUK TABEL M_PENJAMIN
+
 namespace App\Http\Controllers;
 
 use App\Models\M_penjamin;
