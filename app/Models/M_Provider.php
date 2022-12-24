@@ -9,5 +9,5 @@ class M_Provider extends Model
 {
     use HasFactory;
     protected $table='m_provider';
-    protected $fillable=['provider'];
+    protected $fillable=['id','provider'];
 }
