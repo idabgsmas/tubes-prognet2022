@@ -91,11 +91,15 @@
                 @foreach ($tipe_iks as $iks_tipe)
                   <option value="{{ $iks_tipe->id }}" @if($data->tipe_id===$iks_tipe->id) SELECTED @endif>{{ $iks_tipe->nama }}</option>
                 @endforeach
-              </select>
+            </select>
         </div>
         <div class="mb-3">
             <label for="status_aktif" class="form-label">Status Aktif</label>
-            <input name="status_aktif" type="number" value="{{ $data['status_aktif'] }}" class="form-control" id="status_aktif" aria-describedby="status_aktif" required>
+            <select class="custom-select" id="status_aktif" name="status_aktif" aria-describedby="status_aktif" required>
+                <option value="" disabled>Pilih Status Aktif</option>
+                <option value="0" @if($data->status_aktif==0) SELECTED @endif>Tidak Aktif</option>
+                <option value="1" @if($data->status_aktif==1) SELECTED @endif>Aktif</option>
+            </select>
         </div>
         <div class="mb-3">
             <label for="masa_berlaku_awal" class="form-label">Masa Berlaku Awal</label>

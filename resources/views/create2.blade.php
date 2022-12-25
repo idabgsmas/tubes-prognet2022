@@ -76,7 +76,11 @@
         </div>
         <div class="mb-3">
             <label for="status_aktif" class="form-label">Status Aktif</label>
-            <input name="status_aktif" type="text" class="form-control" id="status_aktif" aria-describedby="status_aktif">
+            <select class="custom-select" id="status_aktif" name="status_aktif" aria-describedby="status_aktif" required>
+                <option selected disabled>Status</option>
+                <option value="0">Tidak Aktif</option>
+                <option value="1">Aktif</option>
+            </select>
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
