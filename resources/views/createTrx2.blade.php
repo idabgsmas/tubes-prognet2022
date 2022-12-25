@@ -130,11 +130,7 @@ function store(){
                     iks_id:$("#iks_id").val(),
                     provider_id:$("#provider_id").val(),
                     iks_gkomponen_id:$("#iks_gkomponen_id").val(),
-<<<<<<< HEAD
                     group:$("#group").val()
-=======
-                    group:$("#group").val(),
->>>>>>> 0f2b90aad97339e2fb2104444e345b61a4a925b9
                 },
                 type:"POST",
                 dataType:"JSON",
