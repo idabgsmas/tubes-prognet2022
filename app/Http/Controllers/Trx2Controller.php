@@ -67,7 +67,7 @@ class Trx2Controller extends Controller
     public function store(Request $request)
     {
         // dd($request->all());die;
-        if(M_iks::create($request->all())){
+        if(T_komponen_iks::create($request->all())){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
@@ -85,7 +85,7 @@ class Trx2Controller extends Controller
         return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider'));
     }
 
-    public function update(Request $request, M_iks $data, $id)
+    public function update(Request $request, T_komponen_iks $data, $id)
     {
         $data = T_komponen_iks::find($id);
         if($data->fill($request->all())->save()) {
