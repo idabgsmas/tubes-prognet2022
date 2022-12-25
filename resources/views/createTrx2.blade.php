@@ -95,11 +95,11 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="iks_gkomponen_id" class="form-label">Group</label>
-            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
+            <label for="group" class="form-label">Group</label>
+            <select class="custom-select" id="group" name="group" aria-describedby="group" required>
                 <option selected disabled>Pilih Group Komponen IKS</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}">{{ $g->group }}</option>
+                  <option value="{{ $g->group }}">{{ $g->group }}</option>
                 @endforeach
             </select>
         </div>
@@ -128,8 +128,9 @@ function store(){
                     _method:"POST",
                     _token:"{{csrf_token()}}",
                     iks_id:$("#iks_id").val(),
-                    gkomponen_id:$("#gkomponen_id").val(),
                     provider_id:$("#provider_id").val(),
+                    iks_gkomponen_id:$("#iks_gkomponen_id").val(),
+                    group:$("#group").val()
                 },
                 type:"POST",
                 dataType:"JSON",

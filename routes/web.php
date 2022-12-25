@@ -5,8 +5,8 @@ use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\Crud3Controller;
 use App\Http\Controllers\Crud4Controller;
 use App\Http\Controllers\Crud5Controller;
-use App\Http\Controllers\Trx2Controller;
 use App\Http\Controllers\Crud6Controller;
+use App\Http\Controllers\Trx2Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,7 +87,6 @@ Route::post('crud5/update5/{id}',[Crud5Controller::class,'update'])->name('crud5
 Route::delete('/crud5/{id}',[Crud5Controller::class,'deleteData'])->name('crud5.delete');
 Route::post('/crud5/listData5',[Crud5Controller::class,'listData'])->name('crud5.listData');
 
-// Routes 7 untuk T_KOOMPONEN_IKS
 // Routes 6 untuk M_PROVIDER
 Route::get('/crud6',[Crud6Controller::class,'index'])->name('crud6.list');
 
@@ -100,7 +99,7 @@ Route::post('crud6/update6/{id}',[Crud6Controller::class,'update'])->name('crud6
 Route::delete('/crud6/{id}',[Crud6Controller::class,'deleteData'])->name('crud6.delete');
 Route::post('/crud6/listData6',[Crud6Controller::class,'listData'])->name('crud6.listData');
 
-// Routes  untuk T_KOOMPONEN_IKS
+// Routes untuk T_KOOMPONEN_IKS
 Route::get('/trx2',[Trx2Controller::class,'index'])->name('trx2.list');
 
 Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');

@@ -32,17 +32,7 @@ class Trx2Controller extends Controller
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
-                ->editColumn('status_aktif',function($status)
-                {
-                    if($status->status_aktif == 0)
-                    {
-                        return '<button class="btn btn-danger btn-xs">Tidak Aktif</button>';
-                    }elseif($status->status_aktif == 1)
-                    {
-                        return '<button class="btn btn-success btn-xs">Aktif</button>';
-                    }
-                })
-                ->rawColumns(['aksi','status_aktif'])
+                ->rawColumns(['aksi'])
                 ->make(true);
     }
 
@@ -67,7 +57,7 @@ class Trx2Controller extends Controller
     public function store(Request $request)
     {
         // dd($request->all());die;
-        if(M_iks::create($request->all())){
+        if(T_komponen_iks::create($request->all())){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
@@ -85,7 +75,7 @@ class Trx2Controller extends Controller
         return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider'));
     }
 
-    public function update(Request $request, M_iks $data, $id)
+    public function update(Request $request, T_komponen_iks $data, $id)
     {
         $data = T_komponen_iks::find($id);
         if($data->fill($request->all())->save()) {
