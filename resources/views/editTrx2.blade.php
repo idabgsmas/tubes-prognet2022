@@ -85,11 +85,11 @@
               </select>
         </div>
         <div class="mb-3">
-            <label for="gkomponen_id" class="form-label">Group Komponen</label>
-            <select class="custom-select" id="gkomponen_id" name="gkomponen_id" aria-describedby="gkomponen_id" required>
+            <label for="iks_gkomponen_id" class="form-label">Group Komponen</label>
+            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
                 <option disabled value="0">Pilih id Group Komponen</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}" @if($data->gkomponen_id===$g->id) SELECTED @endif>{{ $g->id }}</option>
+                  <option value="{{ $g->id }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->id }}</option>
                 @endforeach
               </select>
         </div>
@@ -98,7 +98,7 @@
             <select class="custom-select" id="group" name="group" aria-describedby="group" required>
                 <option disabled value="0">Pilih id Group Komponen</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}" @if($data->gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
+                  <option value="{{ $g->group }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
                 @endforeach
               </select>
         </div>
@@ -130,7 +130,8 @@ function update(id){
                     _token:"{{csrf_token()}}",
                     iks_id:$("#iks_id").val(),
                     provider_id:$("#provider_id").val(),
-                    gkomponen_id:$("#gkomponen_id").val(),
+                    iks_gkomponen_id:$("#iks_gkomponen_id").val(),
+                    group:$("#group").val()
                 },
                 type:"POST",
                 dataType:"JSON",
