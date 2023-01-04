@@ -65,8 +65,6 @@
 <!-- </div> -->
 <form method="POST" action="/trx2/store7" enctype="multipart/form-data">
     @csrf
-
-
         <div class="mb-3">
             <label for="iks_id" class="form-label">IKS</label>
             <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
@@ -103,6 +101,11 @@
                 @endforeach
             </select>
         </div>
+        <div class="mb-3">
+            <label for="komponen_iks_detail" class="form-label">Detail Transaksi</label>
+            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+        </div>
+
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
         <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
@@ -130,7 +133,8 @@ function store(){
                     iks_id:$("#iks_id").val(),
                     provider_id:$("#provider_id").val(),
                     iks_gkomponen_id:$("#iks_gkomponen_id").val(),
-                    group:$("#group").val()
+                    group:$("#group").val(),
+                    komponen_iks_detail:$("#komponen_iks_detail").val()
                 },
                 type:"POST",
                 dataType:"JSON",

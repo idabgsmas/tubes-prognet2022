@@ -26,4 +26,9 @@ class T_komponen_iks extends Model
     {
         return $this->belongsTo('App\Models\M_Provider','provider_id','id');
     }
+
+    public function dkomponen()
+    {
+        return $this->hasOne(T_komponen_ikss_d::class);
+    }
 }
