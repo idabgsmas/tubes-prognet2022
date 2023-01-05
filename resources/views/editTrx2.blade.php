@@ -104,7 +104,7 @@
         </div>
         <div class="mb-3">
             <label for="komponen_iks_detail" class="form-label">Detail Transaksi</label>
-            <input name="komponen_iks_detail" value="{{ $data['komponen_iks_detail'] }}" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+        <input name="komponen_iks_detail" value="{{ $data['komponen_iks_detail']}}" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 

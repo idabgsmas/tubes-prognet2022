@@ -29,6 +29,6 @@ class T_komponen_iks extends Model
 
     public function dkomponen()
     {
-        return $this->hasOne(T_komponen_ikss_d::class);
+        return $this->hasMany(T_komponen_iks_d::class, 'komponen_ikss_id');
     }
 }

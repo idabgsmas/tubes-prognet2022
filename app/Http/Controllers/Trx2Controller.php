@@ -67,7 +67,7 @@ class Trx2Controller extends Controller
         $tkomponen->iks_id = $data['iks_id'];
         $tkomponen->provider_id = $data['provider_id'];
         $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
-        $tkomponen->group = $data['iks_id'];
+        $tkomponen->group = $data['group'];
         $tkomponen->save();
         
         $dkomponen = new T_komponen_iks_d();
@@ -75,7 +75,7 @@ class Trx2Controller extends Controller
         $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
         $dkomponen->save();
 
-        if(T_komponen_iks::create($request->all())){
+        if( ($request->all())){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
@@ -91,11 +91,31 @@ class Trx2Controller extends Controller
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $provider = M_Provider::all();
-        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider'));
+        $dkomponen = T_komponen_iks_d::all();
+        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider', 'dkomponen'));
     }
 
-    public function update(Request $request, T_komponen_iks $data, $id)
+    public function update(Request $request,  $id)
     {
+
+        $tkomponen  = T_komponen_iks::with('dkomponen')->find($id);
+        T_komponen_iks_d::where('komponen_ikss_id', $id)->delete();
+        $data=$request->all();
+        
+        $tkomponen -> update([
+            'iks_id' => $data['iks_id'],
+            'provider_id' => $data['provider_id'],
+            'iks_gkomponen_id' => $data['iks_gkomponen_id'],
+            'group' => $data['iks_id'],
+            // 'komponen_iks_detail' => $data['komponen_iks_detail']
+        ]);
+
+        $dkomponen = new T_komponen_iks_d();
+        $dkomponen->komponen_ikss_id=$tkomponen->id;
+        $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
+        $dkomponen->save();
+    
+
         $data = T_komponen_iks::find($id);
         if($data->fill($request->all())->save()) {
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
@@ -103,6 +123,6 @@ class Trx2Controller extends Controller
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
         }
         return $response;
-        // return redirect('crud')->with('success',"Data berhasil diedit!");
+        return redirect('crud')->with('success',"Data berhasil diedit!");
     }
 }

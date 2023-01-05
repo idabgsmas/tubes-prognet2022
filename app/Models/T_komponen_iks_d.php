@@ -13,6 +13,6 @@ class T_komponen_iks_d extends Model
 
     public function tkomponen()
     {
-        return $this->hasOne('App\Models\T_komponen_iks','komponen_ikss_id','id');
+        return $this->belongsTo('App\Models\T_komponen_iks','komponen_ikss_id','id');
     }
 }
