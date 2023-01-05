@@ -30,7 +30,7 @@ class Trx2Controller extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Detail Data' href='/trx2/".$data->id."/detail7' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
+                    $aksi .= "<a title='Detail Data' href='/trx2/".$data->id."/show7' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
                     $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
@@ -124,5 +124,30 @@ class Trx2Controller extends Controller
         }
         return $response;
         return redirect('crud')->with('success',"Data berhasil diedit!");
+    }
+
+    public function indexShow(Request $request){
+        $data = T_komponen_iks::find($request->id);
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Detail Transaksi Komponen IKS';
+        $table_id = 't_komponen_ikss_d';
+        return view('showTrx2',compact('subtitle', 'data', 'table_id','icon'));
+    }
+
+    public function showList(Request $request){
+        // $dkomponen  = T_komponen_iks_d::find($id);
+        $data = T_komponen_iks_d::select(['id', 'komponen_iks_detail']);
+        $datatables = DataTables::of($data);
+        return $datatables
+                ->addIndexColumn()
+                ->addColumn('aksi', function($data){
+                    $aksi = "";
+                    $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+            
     }
 }

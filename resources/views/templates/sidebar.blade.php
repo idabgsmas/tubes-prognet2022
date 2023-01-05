@@ -66,13 +66,7 @@
                                 <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Transactions</h6>
                                 </li>
-                                <!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="{{URL('/trx1')}}" class="nk-menu-link">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
-                                        <span class="nk-menu-text">Transaksi Provider IKS</span><!-- <span class="nk-menu-badge">HOT</span> -->
-                                    </a>
-                                </li>
+                        
                                 <!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
                                     <a href="{{URL('/trx2')}}" class="nk-menu-link">
