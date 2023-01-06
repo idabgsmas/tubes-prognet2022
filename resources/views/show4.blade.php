@@ -13,7 +13,7 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('crud4.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -49,8 +49,8 @@
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
                             <th width="10%">ID</th>
-                            <th width="10%">ID Transaksi</th>
-                            <th width="10%">Detail Transaksi</th>
+                            <th width="10%">Group Komponen</th>
+                            <th width="10%">Detail Group Komponen</th>
                             <!-- <th width="10%">Aksi</th> -->
                         </thead>
                         <tbody></tbody>
@@ -73,7 +73,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("trx2.showList") }}',
+            url: '{{ route("crud4.showList4") }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
@@ -90,15 +90,15 @@ $(document).ready(function() {
                 class: 'text-left'
             },
             {
-                data: 'komponen_ikss_id',
-                name: 'komponen_ikss_id',
+                data: 'gkomponen.group',
+                name: 'gkomponen.group',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
             {
-                data: 'komponen_iks_detail',
-                name: 'komponen_iks_detail',
+                data: 'gkomponen_detail',
+                name: 'gkomponen_detail',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
