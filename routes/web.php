@@ -118,10 +118,11 @@ Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.l
 
 // Routes untuk T_KOMPONEN_IKS_D
 Route::get('/trxd2',[Trxd2Controller::class,'index'])->name('trxd2.list');
+Route::post('/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
 
 Route::get('/{id}/trxd2/transaksiDetail8',[Trxd2Controller::class,'transaksiDetail'])->name('trxd2.transaksiDetail');
-// Route::post('/{id}/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
-Route::post('/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
+// Route::post('/{id}/trxd2/listdetailData8',[Trxd2Controller:: class,'listdetailData'])->name('trxd2.listdetailData');
+
 
 Route::get('/trxd2/create8',[Trxd2Controller::class,'create'])->name('trxd2.create');
 Route::post('/trxd2/store8',[Trxd2Controller::class,'store'])->name('trxd2.store');

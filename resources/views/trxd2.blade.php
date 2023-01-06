@@ -50,7 +50,7 @@
                             <th width="1%">No.</th>
                             <th width="10%">ID</th>
                             <th width="10%">Detail Transaksi</th>
-                            <th width="10%">Aksi</th>
+
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -93,13 +93,6 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
-            },
-            {
-                data: 'aksi',
-                name: 'aksi',
-                orderable: false,
-                searchable: false,
-                class: 'text-center'
             }
         ],
     });

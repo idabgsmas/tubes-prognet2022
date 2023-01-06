@@ -26,17 +26,8 @@ class Trxd2Controller extends Controller
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
-                ->addColumn('aksi', function($data){
-                    $aksi = "";
-                    $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
-                    return $aksi;
-                })
-                ->rawColumns(['aksi'])
                 ->make(true);
     }
-
-
 
     public function transaksiDetail($id){
         $icon = 'ni ni-dashlite';
@@ -47,20 +38,14 @@ class Trxd2Controller extends Controller
         return view('trxd2',compact('subtitle','table_id','icon', 'komponen_ikss_id', 'tkomponen'));
     }
 
-    public function listdetailData(Request $request, $komponen_ikss_id){
-        $data = T_komponen_iks_d::select('id', 'komponen_ikss_id', 'komponen_iks_detail')->where('komponen_ikss_id', $komponen_ikss_id)->get();
-        $datatables = DataTables::of($data);
-        return $datatables
-                ->addIndexColumn()
-                ->addColumn('aksi', function($data){
-                    $aksi = "";
-                    // $aksi .= "<a title='Edit Data' href='/riwayatdiklat/".$data->id."/edit' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    // $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id_t_diklat}\",\"{$data->nama_kursus}\",this)' class='btn btn-md btn-danger' data-id_t_diklat='{$data->id_t_diklat}' data-nama_kursus='{$data->nama_kursus}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
-                    return $aksi;
-                })
-                ->rawColumns(['aksi'])
-                ->make(true);
-    }
+    // public function listdetailData(Request $request, $komponen_ikss_id){
+    //     $data = T_komponen_iks_d::select('id', 'komponen_ikss_id', 'komponen_iks_detail')->where('komponen_ikss_id', $komponen_ikss_id)->get();
+    //     $datatables = DataTables::of($data);
+        
+    //     return $datatables
+    //             ->addIndexColumn()
+    //             ->make(true);
+    // }
 
     public function deleteData(Request $request){
         if(T_komponen_iks::destroy($request->id)){
@@ -107,45 +92,44 @@ class Trxd2Controller extends Controller
 
     }  
 
-    public function edit(Request $request){
-        $data = T_komponen_iks::find($request->id);
-        $icon = 'ni ni-dashlite';
-        $subtitle = 'Edit Data Transaksi Komponen';
-        $iks = M_iks::all();
-        $gkomponen = M_iks_gkomponen::all();
-        $provider = M_Provider::all();
-        $dkomponen = T_komponen_iks_d::all();
-        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider', 'dkomponen'));
-    }
+    // public function edit(Request $request){
+    //     $data = T_komponen_iks_d::find($request->id);
+    //     $icon = 'ni ni-dashlite';
+    //     $subtitle = 'Edit Data Transaksi Komponen';
+    //     $iks = M_iks::all();
+    //     $gkomponen = M_iks_gkomponen::all();
+    //     $provider = M_Provider::all();
+    //     $tkomponen = T_komponen_iks::all();
+    //     return view('editTrxd2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider', 'tkomponen'));
+    // }
 
-    public function update(Request $request,  $id)
-    {
+    // public function update(Request $request,  $id)
+    // {
 
-        $tkomponen  = T_komponen_iks::with('dkomponen')->find($id);
-        T_komponen_iks_d::where('komponen_ikss_id', $id)->delete();
-        $data=$request->all();
+    //     $dkomponen  = T_komponen_iks_d::with('tkomponen')->find($id);
+    //     T_komponen_iks_d::where('komponen_ikss_id', $id)->delete();
+    //     $data=$request->all();
         
-        $tkomponen -> update([
-            'iks_id' => $data['iks_id'],
-            'provider_id' => $data['provider_id'],
-            'iks_gkomponen_id' => $data['iks_gkomponen_id'],
-            'group' => $data['iks_id'],
-            // 'komponen_iks_detail' => $data['komponen_iks_detail']
-        ]);
-
-        $dkomponen = new T_komponen_iks_d();
-        $dkomponen->komponen_ikss_id=$tkomponen->id;
-        $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
-        $dkomponen->save();
+    //     $tkomponen = new T_komponen_iks(); 
+    //     $tkomponen->iks_id = $data['iks_id'];
+    //     $tkomponen->provider_id = $data['provider_id'];
+    //     $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
+    //     $tkomponen->group = $data['group'];
+    //     $tkomponen->save();
+        
+    //     $dkomponen = new T_komponen_iks_d();
+    //     $dkomponen->komponen_ikss_id=$tkomponen->id;
+    //     $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
+    //     $dkomponen->save();
     
 
-        $data = T_komponen_iks::find($id);
-        if($data->fill($request->all())->save()) {
-            $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
-        } else {
-            $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
-        }
-        return $response;
-        return redirect('crud')->with('success',"Data berhasil diedit!");
-    }
+    //     $data = T_komponen_iks::find($id);
+    //     if($data->fill($request->all())->save()) {
+    //         $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
+    //     } else {
+    //         $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
+    //     }
+    //     return $response;
+    //     return redirect('crud')->with('success',"Data berhasil diedit!");
+    // }
 }
