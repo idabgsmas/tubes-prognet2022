@@ -7,6 +7,7 @@ use App\Http\Controllers\Crud4Controller;
 use App\Http\Controllers\Crud5Controller;
 use App\Http\Controllers\Crud6Controller;
 use App\Http\Controllers\Trx2Controller;
+use App\Http\Controllers\Trxd2Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -119,7 +120,8 @@ Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.l
 Route::get('/trxd2',[Trxd2Controller::class,'index'])->name('trxd2.list');
 
 Route::get('/{id}/trxd2/transaksiDetail8',[Trxd2Controller::class,'transaksiDetail'])->name('trxd2.transaksiDetail');
-Route::post('/{id}/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
+// Route::post('/{id}/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
+Route::post('/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
 
 Route::get('/trxd2/create8',[Trxd2Controller::class,'create'])->name('trxd2.create');
 Route::post('/trxd2/store8',[Trxd2Controller::class,'store'])->name('trxd2.store');

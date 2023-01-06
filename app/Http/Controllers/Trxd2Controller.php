@@ -21,6 +21,21 @@ class Trxd2Controller extends Controller
         return view('trxd2',compact('subtitle','table_id','icon'));
     }
 
+    public function listData(Request $request){
+        $data = T_komponen_iks_d::select(['id','komponen_ikss_id', 'komponen_iks_detail']);
+        $datatables = DataTables::of($data);
+        return $datatables
+                ->addIndexColumn()
+                ->addColumn('aksi', function($data){
+                    $aksi = "";
+                    $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+    }
+
 
 
     public function transaksiDetail($id){
@@ -32,7 +47,7 @@ class Trxd2Controller extends Controller
         return view('trxd2',compact('subtitle','table_id','icon', 'komponen_ikss_id', 'tkomponen'));
     }
 
-    public function listData(Request $request, $komponen_ikss_id){
+    public function listdetailData(Request $request, $komponen_ikss_id){
         $data = T_komponen_iks_d::select('id', 'komponen_ikss_id', 'komponen_iks_detail')->where('komponen_ikss_id', $komponen_ikss_id)->get();
         $datatables = DataTables::of($data);
         return $datatables
@@ -63,7 +78,7 @@ class Trxd2Controller extends Controller
         $gkomponen = M_iks_gkomponen::all();
         $provider = M_Provider::all();
         $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'provider', 'dkomponen'));
+        return view('createTrxd2',compact('subtitle','icon','iks', 'gkomponen', 'provider', 'dkomponen'));
     }
 
     public function store(Request $request)
