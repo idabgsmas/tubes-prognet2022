@@ -9,30 +9,38 @@ use App\Models\M_iks_gkomponen;
 use App\Models\M_Provider;
 use App\Models\T_komponen_iks;
 use App\Models\T_komponen_iks_d;
-use App\Models\T_komponen_ikss_d;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class Trx2Controller extends Controller
+class Trxd2Controller extends Controller
 {
     public function index(){
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Transaksi Komponen IKS';
-        $table_id = 't_komponen_ikss';
-        return view('trx2',compact('subtitle','table_id','icon'));
+        $subtitle = 'Transaksi Detail Komponen IKS';
+        $table_id = 't_komponen_ikss_d';
+        return view('trxd2',compact('subtitle','table_id','icon'));
     }
 
-    public function listData(Request $request){
-        $data = T_komponen_iks::select(['id','iks_id','iks_gkomponen_id', 'provider_id','group'])
-        ->with(['iks','gkomponen', 'provider' ]);
+
+
+    public function transaksiDetail($id){
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Detail Transaksi Komponen IKS';
+        $table_id = 't_komponen_ikss_d';
+        $tkomponen = T_komponen_iks::find($id);
+        $komponen_ikss_id = $id;
+        return view('trxd2',compact('subtitle','table_id','icon', 'komponen_ikss_id', 'tkomponen'));
+    }
+
+    public function listData(Request $request, $komponen_ikss_id){
+        $data = T_komponen_iks_d::select('id', 'komponen_ikss_id', 'komponen_iks_detail')->where('komponen_ikss_id', $komponen_ikss_id)->get();
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Detail Data' href='/".$data->id."/trxd2/transaksiDetail8' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
-                    $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    // $aksi .= "<a title='Edit Data' href='/riwayatdiklat/".$data->id."/edit' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    // $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id_t_diklat}\",\"{$data->nama_kursus}\",this)' class='btn btn-md btn-danger' data-id_t_diklat='{$data->id_t_diklat}' data-nama_kursus='{$data->nama_kursus}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
                 ->rawColumns(['aksi'])
@@ -125,29 +133,4 @@ class Trx2Controller extends Controller
         return $response;
         return redirect('crud')->with('success',"Data berhasil diedit!");
     }
-
-    // public function indexShow(Request $request){
-    //     $data = T_komponen_iks::find($request->id);
-    //     $icon = 'ni ni-dashlite';
-    //     $subtitle = 'Detail Transaksi Komponen IKS';
-    //     $table_id = 't_komponen_ikss_d';
-    //     return view('showTrx2',compact('subtitle', 'data', 'table_id','icon'));
-    // }
-
-    // public function showList(Request $request){
-    //     // $dkomponen  = T_komponen_iks_d::find($id);
-    //     $data = T_komponen_iks_d::select(['id','komponen_ikss_id', 'komponen_iks_detail']);
-
-    //     $datatables = DataTables::of($data);
-    //     return $datatables
-    //             ->addIndexColumn()
-    //             ->addColumn('aksi', function($data){
-    //                 $aksi = "";
-    //                 $aksi .= "<a title='Kembali' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-    //                 $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
-    //                 return $aksi;
-    //             })
-    //             ->rawColumns(['aksi'])
-    //             ->make(true);
-    // }
 }

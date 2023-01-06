@@ -72,7 +72,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("trx2.showList") }}',
+            url: '{{ route("trxd2.listData") }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
@@ -108,50 +108,50 @@ $(document).ready(function() {
 });
 
 
-function deleteData(id,elm){
-    console.log(elm);
-    // buttonsmdisable(elm);
-    CustomSwal.fire({
-        icon:'question',
-        text: 'Hapus Data '+id+' ?',
-        showCancelButton: true,
-        confirmButtonText: 'Hapus',
-        cancelButtonText: 'Batal',
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            $.ajax({
-                url:"{{url('trx2')}}/"+id,
-                data:{
-                    _method:"DELETE",
-                    _token:"{{csrf_token()}}"
-                },
-                type:"POST",
-                dataType:"JSON",
-                beforeSend:function(){
-                    block("#{{$table_id}}");
-                },
-                success:function(data){
-                    if(data.success == 1){
-                        CustomSwal.fire('Sukses', data.msg, 'success');
-                    }else{
-                        CustomSwal.fire('Gagal', data.msg, 'error');
-                    }
-                    unblock("#{{$table_id}}");
-                    RefreshTable('{{$table_id}}',0);
-                },
-                error:function(error){
-                    CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-                    console.log(error.XMLHttpRequest);
-                    unblock("#{{$table_id}}");
-                    RefreshTable('{{$table_id}}',0);
-                }
-            });
-        }else{
-            RefreshTable('{{$table_id}}',0);
-        }
-    });
-}
+// function deleteData(id,elm){
+//     console.log(elm);
+//     // buttonsmdisable(elm);
+//     CustomSwal.fire({
+//         icon:'question',
+//         text: 'Hapus Data '+id+' ?',
+//         showCancelButton: true,
+//         confirmButtonText: 'Hapus',
+//         cancelButtonText: 'Batal',
+//     }).then((result) => {
+//         /* Read more about isConfirmed, isDenied below */
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 url:"{{url('trx2')}}/"+id,
+//                 data:{
+//                     _method:"DELETE",
+//                     _token:"{{csrf_token()}}"
+//                 },
+//                 type:"POST",
+//                 dataType:"JSON",
+//                 beforeSend:function(){
+//                     block("#{{$table_id}}");
+//                 },
+//                 success:function(data){
+//                     if(data.success == 1){
+//                         CustomSwal.fire('Sukses', data.msg, 'success');
+//                     }else{
+//                         CustomSwal.fire('Gagal', data.msg, 'error');
+//                     }
+//                     unblock("#{{$table_id}}");
+//                     RefreshTable('{{$table_id}}',0);
+//                 },
+//                 error:function(error){
+//                     CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+//                     console.log(error.XMLHttpRequest);
+//                     unblock("#{{$table_id}}");
+//                     RefreshTable('{{$table_id}}',0);
+//                 }
+//             });
+//         }else{
+//             RefreshTable('{{$table_id}}',0);
+//         }
+//     });
+// }
 
 </script>
 @endpush

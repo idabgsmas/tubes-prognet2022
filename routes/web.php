@@ -102,8 +102,8 @@ Route::post('/crud6/listData6',[Crud6Controller::class,'listData'])->name('crud6
 // Routes untuk T_KOMPONEN_IKS
 Route::get('/trx2',[Trx2Controller::class,'index'])->name('trx2.list');
 
-Route::get('/trx2/{id}/show7',[Trx2Controller::class,'indexShow'])->name('trx2.show');
-Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.showList');
+// Route::get('/trx2/{id}/show7',[Trx2Controller::class,'indexShow'])->name('trx2.show');
+// Route::post('/trx2/showList7}',[Trx2Controller:: class,'showList'])->name('trx2.showList');
 
 Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
 Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
@@ -113,3 +113,18 @@ Route::post('trx2/update7/{id}',[Trx2Controller::class,'update'])->name('trx2.up
 
 Route::delete('/trx2/{id}',[Trx2Controller::class,'deleteData'])->name('trx2.delete');
 Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.listData');
+
+
+// Routes untuk T_KOMPONEN_IKS_D
+Route::get('/trxd2',[Trxd2Controller::class,'index'])->name('trxd2.list');
+
+Route::get('/{id}/trxd2/transaksiDetail8',[Trxd2Controller::class,'transaksiDetail'])->name('trxd2.transaksiDetail');
+Route::post('/{id}/trxd2/listData8',[Trxd2Controller:: class,'listData'])->name('trxd2.listData');
+
+Route::get('/trxd2/create8',[Trxd2Controller::class,'create'])->name('trxd2.create');
+Route::post('/trxd2/store8',[Trxd2Controller::class,'store'])->name('trxd2.store');
+
+Route::get('/trxd2/{id}/edit8',[Trxd2Controller::class,'edit'])->name('trxd2.edit');
+Route::post('trxd2/update8/{id}',[Trxd2Controller::class,'update'])->name('trxd2.update');
+
+Route::delete('/trxd2/{id}',[Trxd2Controller::class,'deleteData'])->name('trxd2.delete');
