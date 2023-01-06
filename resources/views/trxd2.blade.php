@@ -13,7 +13,11 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
+<<<<<<< HEAD:resources/views/showTrx2.blade.php
             <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+=======
+            <a href="{{ route('trxd2.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+>>>>>>> aef469b46ab3a3a72c68a3335ac752dfedc4d4b2:resources/views/trxd2.blade.php
         </div>
     </div>
 </div>
@@ -51,7 +55,11 @@
                             <th width="10%">ID</th>
                             <th width="10%">ID Transaksi</th>
                             <th width="10%">Detail Transaksi</th>
+<<<<<<< HEAD:resources/views/showTrx2.blade.php
                             <!-- <th width="10%">Aksi</th> -->
+=======
+
+>>>>>>> aef469b46ab3a3a72c68a3335ac752dfedc4d4b2:resources/views/trxd2.blade.php
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -73,7 +81,7 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("trx2.showList") }}',
+            url: '{{ route("trxd2.listData") }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
@@ -95,6 +103,7 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
+<<<<<<< HEAD:resources/views/showTrx2.blade.php
             },
             {
                 data: 'komponen_iks_detail',
@@ -102,6 +111,8 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
+=======
+>>>>>>> aef469b46ab3a3a72c68a3335ac752dfedc4d4b2:resources/views/trxd2.blade.php
             }
             // {
             //     data: 'aksi',
@@ -130,7 +141,7 @@ function deleteData(id,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('trx2')}}/"+id,
+                url:"{{url('trxd2')}}/"+id,
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"
