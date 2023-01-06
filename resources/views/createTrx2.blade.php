@@ -8,6 +8,7 @@
 @endsection
 @section('content')
 
+
 <div class="nk-fmg-body-head d-none d-lg-flex">
     <div class="nk-fmg-search">
         <!-- <em class="icon ni ni-search"></em> -->
@@ -84,26 +85,30 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="iks_gkomponen_id" class="form-label">id Group Komponen IKS</label>
+            <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>
             <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
-                <option selected disabled>Pilih id Group Komponen IKS</option>
+                <option selected disabled>Pilih Group Komponen IKS</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}">{{ $g->id }}</option>
+                  <option value="{{ $g->id }}">{{ $g->group }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
+        <input type="hidden" name="group" id="group" />
+        <!-- <div class="mb-3">
             <label for="group" class="form-label">Group</label>
             <select class="custom-select" id="group" name="group" aria-describedby="group" required>
-                <option selected disabled>Pilih Group Komponen IKS</option>
+                <option selected disabled>Group Komponen IKS</option>
                 @foreach ($gkomponen as $g)
                   <option value="{{ $g->group }}">{{ $g->group }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
         <div class="mb-3">
-            <label for="komponen_iks_detail" class="form-label">Detail Transaksi</label>
-            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+            <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
+            <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
+                <option disabled>Pilih Detail Group Komponen IKS</option>
+            </select>
+            <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
         </div>
 
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
@@ -113,6 +118,12 @@
 @endsection
 @push('script')
 <script>
+
+$(function () {
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+});
 
 function store(){
     // buttonsmdisable(elm);
@@ -157,6 +168,24 @@ function store(){
         }
     });
 }
+
+$(function() {
+    
+    $('#iks_gkomponen_id').on('change',function(){
+        $('#group').val($('#iks_gkomponen_id option:selected').text());
+        $('#komponen_iks_detail').empty();
+        $.get("{{ url('trx2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
+            $.each(JSON.parse(data), function(key, val){
+                $('#komponen_iks_detail').append($('<option>', { 
+                    value: val.gkomponen_detail,
+                    text : val.gkomponen_detail
+                }));
+            })
+        });
+        
+    })
+})
+
 </script>
 @endpush
 

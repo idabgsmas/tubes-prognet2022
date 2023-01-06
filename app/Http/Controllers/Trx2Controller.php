@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\M_iks;
 use App\Models\M_iks_gkomponen;
+use App\Models\M_iks_gkomponen_detail;
 use App\Models\M_Provider;
 use App\Models\T_komponen_iks;
 use App\Models\T_komponen_iks_d;
@@ -53,10 +54,20 @@ class Trx2Controller extends Controller
         $subtitle = 'Tambah Transaksi Komponen IKS ';
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
+        $gkomponen_d = M_iks_gkomponen_detail::all();
         $provider = M_Provider::all();
         $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'provider', 'dkomponen'));
+        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d', 'provider', 'dkomponen'));
     }
+
+    // public function getdetail (request $request){
+    //     $gkomponen_id = $request->gkomponen_id;
+
+    //     $gkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $gkomponen_id)->get();
+    //     foreach ($gkomponen_detail as $gdetail){
+    //         echo "<option value='$gdetail->gkomponen_detail'> $gdetail->gkomponen_detail </option>";
+    //     }
+    // }
 
     public function store(Request $request)
     {
@@ -85,45 +96,54 @@ class Trx2Controller extends Controller
     }  
 
     public function edit(Request $request){
-        $data = T_komponen_iks::find($request->id);
+        $data = T_komponen_iks::with('dkomponen')->find($request->id);
         $icon = 'ni ni-dashlite';
         $subtitle = 'Edit Data Transaksi Komponen';
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $provider = M_Provider::all();
         $dkomponen = T_komponen_iks_d::all();
-        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider', 'dkomponen'));
+        $dkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $data->iks_gkomponen_id)->get();
+        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider', 'dkomponen', 'dkomponen_detail'));
     }
 
     public function update(Request $request,  $id)
     {
 
         $tkomponen  = T_komponen_iks::with('dkomponen')->find($id);
-        T_komponen_iks_d::where('komponen_ikss_id', $id)->delete();
+        // T_komponen_iks_d::where('komponen_ikss_id', $id)->delete();
         $data=$request->all();
         
-        $tkomponen -> update([
+        $tkomponen->update([
             'iks_id' => $data['iks_id'],
             'provider_id' => $data['provider_id'],
             'iks_gkomponen_id' => $data['iks_gkomponen_id'],
-            'group' => $data['iks_id'],
+            'group' => $data['group'],
             // 'komponen_iks_detail' => $data['komponen_iks_detail']
         ]);
 
-        $dkomponen = new T_komponen_iks_d();
-        $dkomponen->komponen_ikss_id=$tkomponen->id;
+        $dkomponen = T_komponen_iks_d::find($tkomponen->dkomponen->id);
         $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
-        $dkomponen->save();
-    
-
-        $data = T_komponen_iks::find($id);
-        if($data->fill($request->all())->save()) {
+        if($dkomponen->save()){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
-        } else {
+        }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
         }
         return $response;
-        return redirect('crud')->with('success',"Data berhasil diedit!");
+        // $dkomponen = new T_komponen_iks_d();
+        // $dkomponen->komponen_ikss_id=$tkomponen->id;
+        // $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
+        // $dkomponen->save();
+    
+
+        // $data = T_komponen_iks::find($id);
+        // if($data->fill($request->all())->save()) {
+        //     $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
+        // } else {
+        //     $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
+        // }
+        // return $response;
+        // return redirect('crud')->with('success',"Data berhasil diedit!");
     }
 
     public function indexShow(Request $request){
@@ -136,18 +156,23 @@ class Trx2Controller extends Controller
 
     public function showList(Request $request){
         // $dkomponen  = T_komponen_iks_d::find($id);
-        $data = T_komponen_iks_d::select(['id', 'komponen_iks_detail']);
+        $data = T_komponen_iks_d::select(['id', 'komponen_ikss_id', 'komponen_iks_detail'])->where('komponen_ikss_id', $request->id);
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
-                ->addColumn('aksi', function($data){
-                    $aksi = "";
-                    $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
-                    return $aksi;
-                })
-                ->rawColumns(['aksi'])
+                // ->addColumn('aksi', function($data){
+                //     $aksi = "";
+                //     $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                //     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                //     return $aksi;
+                // })
+                // ->rawColumns(['aksi'])
                 ->make(true);
             
+    }
+
+    public function getDetailIKS($id){
+        $data = M_iks_gkomponen_detail::where('gkomponen_id', $id)->get();
+        return json_encode($data);
     }
 }

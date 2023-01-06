@@ -48,12 +48,12 @@
                                     </a>
                                 </li>
                                 <!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
+                                <!-- <li class="nk-menu-item">
                                     <a href="{{URL('/crud5')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-coins"></em></span>
                                         <span class="nk-menu-text">Data Detail IKS Grup Komponen</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <!-- .nk-menu-item -->
                                 <li class="nk-menu-item">
                                     <a href="{{URL('/crud6')}}" class="nk-menu-link">
@@ -75,30 +75,30 @@
                                     </a>
                                 </li>
                                 <!-- .nk-menu-header -->
-                                <li class="nk-menu-heading">
+                                <!-- <li class="nk-menu-heading">
                                     <h6 class="overline-title text-primary-alt">Report</h6>
-                                </li>
+                                </li> -->
                                 <!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
+                                <!-- <li class="nk-menu-item">
                                     <a href="{{URL('/report1')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-list-index"></em></span>
                                         <span class="nk-menu-text">Laporan Data IKS</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
+                                <!-- <li class="nk-menu-item">
                                     <a href="{{URL('/report2')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-growth"></em></span>
                                         <span class="nk-menu-text">Laporan Transaksi Provider IKS</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
+                                <!-- <li class="nk-menu-item">
                                     <a href="{{URL('/report3')}}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-growth"></em></span>
                                         <span class="nk-menu-text">Laporan Transaksi Komponen IKS</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 
                             </ul><!-- .nk-menu -->
                         </div><!-- .nk-sidebar-menu -->
