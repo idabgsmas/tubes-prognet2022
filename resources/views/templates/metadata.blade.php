@@ -7,6 +7,7 @@
 <meta name="description" content="{{__('Laravel RBAC template')}}" />
 <meta name="keywords" content="{{__('Laravel RBAC template')}}">
 <meta name="author" content="{{__('Binar Inovasi Nusantara')}}" />
+<meta name="csrf-token" contenct="{{ csrf_token() }}" />
 <!-- Fav Icon  -->
 <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 <!-- Page Title  -->
