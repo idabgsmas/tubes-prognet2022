@@ -89,11 +89,11 @@
             <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
                 <option disabled value="0">Pilih id Group Komponen</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->id }}</option>
+                  <option value="{{ $g->id }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
                 @endforeach
               </select>
         </div>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="group" class="form-label">Group</label>
             <select class="custom-select" id="group" name="group" aria-describedby="group" required>
                 <option disabled value="0">Pilih id Group Komponen</option>
@@ -101,12 +101,20 @@
                   <option value="{{ $g->group }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
                 @endforeach
               </select>
-        </div>
+        </div> -->
+        <input type="hidden" name="group" id="group" value="{{ $data->group }}" />
+
+
         <div class="mb-3">
-            <label for="komponen_iks_detail" class="form-label">Detail Transaksi</label>
-        <input name="komponen_iks_detail" value="{{ $data['komponen_iks_detail']}}" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+            <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
+            <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
+                <option disabled>Pilih Detail Group Komponen IKS</option>
+                @foreach ($dkomponen_detail as $dkom_det)
+                  <option value="{{ $dkom_det->gkomponen_detail }}" @if($data->dkomponen->komponen_iks_detail == $dkom_det->gkomponen_detail) SELECTED @endif>{{ $dkom_det->gkomponen_detail }}</option>
+                @endforeach
+            </select>
+            <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
         </div>
-        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
         <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a>
 </form>
@@ -115,7 +123,20 @@
 
 @push('script')
 <script>
-    
+$('#iks_gkomponen_id').on('change',function(){
+        $('#group').val($('#iks_gkomponen_id option:selected').text());
+        $('#komponen_iks_detail').empty();
+        $.get("{{ url('trx2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
+            $.each(JSON.parse(data), function(key, val){
+                $('#komponen_iks_detail').append($('<option>', { 
+                    value: val.gkomponen_detail,
+                    text : val.gkomponen_detail
+                }));
+            })
+        });
+        
+    })
+
 function update(id){
     // buttonsmdisable(elm);
     CustomSwal.fire({

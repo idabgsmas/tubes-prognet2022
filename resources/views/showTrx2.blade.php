@@ -13,7 +13,7 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('trx2.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -49,8 +49,9 @@
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
                             <th width="10%">ID</th>
+                            <th width="10%">ID Transaksi</th>
                             <th width="10%">Detail Transaksi</th>
-                            <th width="10%">Aksi</th>
+                            <!-- <th width="10%">Aksi</th> -->
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -76,6 +77,7 @@ $(document).ready(function() {
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
+                params.id = {{ $data->id }}
             }
         },
         columns: [
@@ -88,19 +90,26 @@ $(document).ready(function() {
                 class: 'text-left'
             },
             {
-                data: 'komponen_iks_detail',
-                name: 'komponen_iks_detail',
+                data: 'komponen_ikss_id',
+                name: 'komponen_ikss_id',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
             },
             {
-                data: 'aksi',
-                name: 'aksi',
-                orderable: false,
-                searchable: false,
-                class: 'text-center'
+                data: 'komponen_iks_detail',
+                name: 'komponen_iks_detail',
+                orderable: true,
+                searchable: true,
+                class: 'text-left'
             }
+            // {
+            //     data: 'aksi',
+            //     name: 'aksi',
+            //     orderable: false,
+            //     searchable: false,
+            //     class: 'text-center'
+            // }
         ],
     });
     
