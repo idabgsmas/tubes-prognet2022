@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\M_iks;
 use App\Models\M_iks_tipe;
 use App\Models\M_penjamin;
+use App\Models\M_Provider;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -20,13 +21,14 @@ class CrudController extends Controller
     }
 
     public function listData(Request $request){
-        $data = M_iks::select(['id','kode','nama','penjamin_id','tipe_id','status_aktif','masa_berlaku_awal','masa_berlaku_akhir'])
-        ->with(['list_iks_tipe','list_penjamin']);
+        $data = M_iks::select(['id','kode','nama','penjamin_id','tipe_id','provider_id','status_aktif','masa_berlaku_awal','masa_berlaku_akhir'])
+        ->with(['list_iks_tipe','list_penjamin', 'list_provider']);
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
+                    $aksi .= "<a title='Transaksi' href='/' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-shopping-cart-full' ></i></a>";
                     $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->kode}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-kode='{$data->kode}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
@@ -59,7 +61,8 @@ class CrudController extends Controller
         $subtitle = 'Tambah Data IKS';
         $penjamin = M_penjamin::all();
         $tipe_iks = M_iks_tipe::all();
-        return view('create',compact('subtitle','icon','penjamin','tipe_iks'));
+        $provider = M_Provider::all();
+        return view('create',compact('subtitle','icon','penjamin','provider','tipe_iks'));
     }
 
     public function store(Request $request)
@@ -79,12 +82,14 @@ class CrudController extends Controller
         $subtitle = 'Edit Data IKS';
         $penjamin = M_penjamin::all();
         $tipe_iks = M_iks_tipe::all();
-        return view('edit',compact('subtitle','icon','data', 'penjamin', 'tipe_iks'));
+        $provider = M_Provider::all();
+        return view('edit',compact('subtitle','icon','data', 'penjamin','provider', 'tipe_iks'));
     }
 
     public function update(Request $request, M_iks $data, $id)
     {
         $data = M_iks::find($id);
+        
         if($data->fill($request->all())->save()) {
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         } else {

@@ -75,15 +75,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
-            <label for="tipe_id" class="form-label">Provider</label>
-            <select class="custom-select" id="provider_id" name="provider_id" aria-describedby="provider_id" required>
-                <option disabled value="0">Pilih Provider</option>
-                @foreach ($provider as $p)
-                  <option value="{{ $p->id }}" @if($data->provider_id===$p->id) SELECTED @endif>{{ $p->provider }}</option>
-                @endforeach
-              </select>
-        </div>
+
         <div class="mb-3">
             <label for="iks_gkomponen_id" class="form-label">Group Komponen</label>
             <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
@@ -154,7 +146,6 @@ function update(id){
                     _method:"POST",
                     _token:"{{csrf_token()}}",
                     iks_id:$("#iks_id").val(),
-                    provider_id:$("#provider_id").val(),
                     iks_gkomponen_id:$("#iks_gkomponen_id").val(),
                     group:$("#group").val(),
                     komponen_iks_detail:$("#komponen_iks_detail").val()

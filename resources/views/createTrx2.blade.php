@@ -76,15 +76,6 @@
               </select>
         </div>
         <div class="mb-3">
-            <label for="provider_id" class="form-label">Provider</label>
-            <select class="custom-select" id="provider_id" name="provider_id" aria-describedby="provider_id" required>
-                <option selected disabled>Pilih Provider IKS</option>
-                @foreach ($provider as $p)
-                  <option value="{{ $p->id }}">{{ $p->provider }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-3">
             <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>
             <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
                 <option selected disabled>Pilih Group Komponen IKS</option>
@@ -142,7 +133,6 @@ function store(){
                     _method:"POST",
                     _token:"{{csrf_token()}}",
                     iks_id:$("#iks_id").val(),
-                    provider_id:$("#provider_id").val(),
                     iks_gkomponen_id:$("#iks_gkomponen_id").val(),
                     group:$("#group").val(),
                     komponen_iks_detail:$("#komponen_iks_detail").val()

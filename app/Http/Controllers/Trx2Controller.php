@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\M_iks;
 use App\Models\M_iks_gkomponen;
 use App\Models\M_iks_gkomponen_detail;
-use App\Models\M_Provider;
 use App\Models\T_komponen_iks;
 use App\Models\T_komponen_iks_d;
 use App\Models\T_komponen_ikss_d;
@@ -24,8 +23,8 @@ class Trx2Controller extends Controller
     }
 
     public function listData(Request $request){
-        $data = T_komponen_iks::select(['id','iks_id','iks_gkomponen_id', 'provider_id','group'])
-        ->with(['iks','gkomponen', 'provider' ]);
+        $data = T_komponen_iks::select(['id','iks_id','iks_gkomponen_id', 'group'])
+        ->with(['iks','gkomponen']);
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
@@ -55,9 +54,8 @@ class Trx2Controller extends Controller
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
-        $provider = M_Provider::all();
         $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d', 'provider', 'dkomponen'));
+        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
     }
 
     // public function getdetail (request $request){
@@ -76,7 +74,6 @@ class Trx2Controller extends Controller
         $data = $request->all();
         $tkomponen = new T_komponen_iks(); 
         $tkomponen->iks_id = $data['iks_id'];
-        $tkomponen->provider_id = $data['provider_id'];
         $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
         $tkomponen->group = $data['group'];
         $tkomponen->save();
@@ -101,10 +98,9 @@ class Trx2Controller extends Controller
         $subtitle = 'Edit Data Transaksi Komponen';
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
-        $provider = M_Provider::all();
         $dkomponen = T_komponen_iks_d::all();
         $dkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $data->iks_gkomponen_id)->get();
-        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'provider', 'dkomponen', 'dkomponen_detail'));
+        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'dkomponen', 'dkomponen_detail'));
     }
 
     public function update(Request $request,  $id)
@@ -116,7 +112,6 @@ class Trx2Controller extends Controller
         
         $tkomponen->update([
             'iks_id' => $data['iks_id'],
-            'provider_id' => $data['provider_id'],
             'iks_gkomponen_id' => $data['iks_gkomponen_id'],
             'group' => $data['group'],
             // 'komponen_iks_detail' => $data['komponen_iks_detail']

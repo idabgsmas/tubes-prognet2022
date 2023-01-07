@@ -16,7 +16,7 @@
             <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
-</div>
+</div> 
 <div class="row gy-3 d-none" id="loaderspin">
     <div class="col-md-12">
         <div class="col-md-12" align="center">

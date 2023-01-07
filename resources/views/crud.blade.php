@@ -52,6 +52,7 @@
                             <th width="10%">Nama</th>
                             <th width="10%">Jaminan</th>
                             <th width="10%">Tipe</th>
+                            <th width="10%">Provider</th>
                             <th width="10%">Status Aktif</th>
                             <th width="10%">Masa Berlaku Awal</th>
                             <th width="10%">Masa Berlaku Akhir</th>
@@ -109,6 +110,14 @@ $(document).ready(function() {
             {
                 data: 'list_iks_tipe.nama',
                 name: 'list_iks_tipe.nama',
+                orderable: true,
+                searchable: true,
+                class: 'text-left'
+            },
+            
+            {
+                data: 'list_provider.provider',
+                name: 'list_provider.provider',
                 orderable: true,
                 searchable: true,
                 class: 'text-left'

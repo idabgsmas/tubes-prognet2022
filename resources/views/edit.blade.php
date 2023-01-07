@@ -94,6 +94,15 @@
             </select>
         </div>
         <div class="mb-3">
+            <label for="provider_id" class="form-label">Provider</label>
+            <select class="custom-select" id="provider_id" name="provider_id" aria-describedby="provider_id" required>
+                <option disabled value="0">Pilih Tipe IKS</option>
+                @foreach ($provider as $provider)
+                  <option value="{{ $provider->id }}" @if($data->provider_id===$provider->id) SELECTED @endif>{{ $provider->provider }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="status_aktif" class="form-label">Status Aktif</label>
             <select class="custom-select" id="status_aktif" name="status_aktif" aria-describedby="status_aktif" required>
                 <option value="" disabled>Pilih Status Aktif</option>
@@ -139,6 +148,7 @@ function update(id){
                     nama:$("#nama").val(),
                     penjamin_id:$("#penjamin_id").val(),
                     tipe_id:$("#tipe_id").val(),
+                    provider_id:$("#provider_id").val(),
                     status_aktif:$("#status_aktif").val(),
                     masa_berlaku_awal:$("#masa_berlaku_awal").val(),
                     masa_berlaku_akhir:$("#masa_berlaku_akhir").val()
