@@ -13,7 +13,7 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('trx2.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            <!-- <a href="{{ route('trx2.create') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a> -->
         </div>
     </div>
 </div>

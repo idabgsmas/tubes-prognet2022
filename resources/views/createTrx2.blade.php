@@ -66,14 +66,25 @@
 <!-- </div> -->
 <form method="POST" action="/trx2/store7" enctype="multipart/form-data">
     @csrf
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="iks_id" class="form-label">IKS</label>
             <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
-                <option selected disabled>Pilih IKS</option>
+             <option selected disabled>Pilih IKS</option>
                 @foreach ($iks as $i)
                   <option value="{{ $i->id }}">{{ $i->nama }}</option>
                 @endforeach
               </select>
+        </div> -->
+        <div class="mb-3">
+            <label for="iks_id" class="form-label">IKS</label>
+            <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
+                <option value="0" disabled>Pilih IKS</option>
+                @foreach ($iks as $i)
+                  <option value="{{ $i->id }}" @if($data->iks_id===$i->id) SELECTED @endif>{{ $i->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+            <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
         </div>
         <div class="mb-3">
             <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>

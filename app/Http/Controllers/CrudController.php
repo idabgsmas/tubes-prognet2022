@@ -16,7 +16,7 @@ class CrudController extends Controller
     public function index(){
         $icon = 'ni ni-dashlite';
         $subtitle = 'IKS';
-        $table_id = 'm_iks';
+        $table_id = 'm_ikss';
         return view('crud',compact('subtitle','table_id','icon'));
     }
 
@@ -28,7 +28,7 @@ class CrudController extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Transaksi' href='/' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-shopping-cart-full' ></i></a>";
+                    $aksi .= "<a title='Transaksi' href='/trx2/".$data->id."/create7' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-shopping-cart-full' ></i></a>";
                     $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->kode}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-kode='{$data->kode}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
@@ -98,4 +98,19 @@ class CrudController extends Controller
         return $response;
         // return redirect('crud')->with('success',"Data berhasil diedit!");
     }
+
+    public function indexShow(Request $request){
+        $data = M_iks::find($request->id);
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Detail Transaksi Komponen IKS';
+        $table_id = 't_komponen_ikss';
+        return view('createTrx2',compact('subtitle', 'data','penjamin','tipe_iks', 'provider', 'table_id','icon'));
+    }
+
+
+    public function getDetailIKS($id){
+        $data = M_iks::where('iks_id', $id)->get();
+        return json_encode($data);
+    }
+    
 }

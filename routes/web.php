@@ -104,9 +104,9 @@ Route::get('/trx2',[Trx2Controller::class,'index'])->name('trx2.list');
 
 Route::get('/trx2/{id}/show7',[Trx2Controller::class,'indexShow'])->name('trx2.show');
 Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.showList');
-
-Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
 Route::get('/trx2/detail-iks/{id}',[Trx2Controller::class, 'getDetailIKS']);
+
+Route::get('/trx2/{id}/create7',[Trx2Controller::class,'create'])->name('trx2.create');
 Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
 
 Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit');
