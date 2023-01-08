@@ -5,6 +5,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\M_iks_gkomponen;
+use App\Models\M_iks_gkomponen_detail;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -24,7 +25,7 @@ class Crud4Controller extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Detail Data' href='/crud4/".$data->id."/detail4' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
+                    $aksi .= "<a title='Detail Data' href='/crud4/".$data->id."/show4' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
                     $aksi .= "<a title='Edit Data' href='/crud4/".$data->id."/edit4' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
@@ -35,6 +36,16 @@ class Crud4Controller extends Controller
 
     public function deleteData(Request $request){
         if(M_iks_gkomponen::destroy($request->id)){
+            $response = array('success'=>1,'msg'=>'Berhasil hapus data');
+        }else{
+            $response = array('success'=>2,'msg'=>'Gagal menghapus data');
+        }
+        return $response;
+        dd($request->all());
+    }
+
+    public function deleteDataDetail(Request $request){
+        if(M_iks_gkomponen_detail::destroy($request->id)){
             $response = array('success'=>1,'msg'=>'Berhasil hapus data');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menghapus data');
@@ -76,5 +87,30 @@ class Crud4Controller extends Controller
         }
         return $response;
         // return redirect('crud')->with('success',"Data berhasil diedit!");
+    }
+
+    public function indexShow(Request $request){
+        $data = M_iks_gkomponen::find($request->id);
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Detail Group Komponen IKS';
+        $table_id = 'm_iks_gkomponen_detail';
+        return view('showCrud4',compact('subtitle', 'data', 'table_id','icon'));
+    }
+
+    public function showList(Request $request){
+        // $dkomponen  = T_komponen_iks_d::find($id);
+        $data = M_iks_gkomponen_detail::select(['id', 'gkomponen_id', 'gkomponen_detail'])->where('gkomponen_id', $request->id)
+        ->with(['gkomponen']);
+        $datatables = DataTables::of($data);
+        return $datatables
+                ->addIndexColumn()
+                ->addColumn('aksi', function($data){
+                    $aksi = "";
+                    $aksi .= "<a title='Edit Data' href='/crud4/".$data->id."/edit5' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteDataDetail(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
     }
 }

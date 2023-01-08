@@ -19,7 +19,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('crud5.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('crud4.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 
@@ -72,13 +72,13 @@
             <select class="custom-select" id="gkomponen_id" name="gkomponen_id" aria-describedby="gkomponen_id" required>
                 <option value="0" disabled>Pilih Group Komponen</option>
                 @foreach ($gkomponen as $komponen)
-                  <option value="{{ $komponen->id }}" @if($data->gkomponen_id===$komponen->id) SELECTED @endif>{{ $komponen->group }}</option>
+                  <option value="{{ $komponen->id }}" @if($data->gkomponen_id===$komponen->id) SELECTED @endif >{{ $komponen->group }}</option>
                 @endforeach
             </select>
         </div>
         <div class="mb-3">
             <label for="gkomponen_detail" class="form-label">Detail Group Komponen</label>
-            <input name="gkomponen_detail" type="text" value="{{ $data['gkomponen_detail'] }}"class="form-control" id="gkomponen_detail" aria-describedby="group">
+            <input name="gkomponen_detail" type="text" value="{{ $data['gkomponen_detail'] }}"class="form-control" id="gkomponen_detail" aria-describedby="gkomponen_detail">
         </div>
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
@@ -115,7 +115,7 @@ function update(id){
                 success:function(data){
                     if(data.success == 1){
                         CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('crud5') }}");
+                        window.location.replace("{{ url('crud4') }}");
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
