@@ -65,6 +65,13 @@ Route::post('/crud3/listData3',[Crud3Controller::class,'listData'])->name('crud3
 // Routes 4 untuk M_IKS_GKOMPONEN
 Route::get('/crud4',[Crud4Controller::class,'index'])->name('crud4.list');
 
+//-- ROUTES DETAIL IKS GROUP KOMPONEN:: M_IKS_GKOMPONEN_DETAIL 
+Route::get('/crud4/{id}/show4',[Crud4Controller::class,'indexShow'])->name('crud4.show');
+Route::post('/crud4/showList4',[Crud4Controller:: class,'showList'])->name('crud4.showList');
+Route::get('/crud4/create5',[Crud5Controller::class,'create'])->name('crud4.create2');
+Route::get('/crud4/{id}/edit5',[Crud5Controller::class,'edit'])->name('crud5.edit');
+//-- END ROUTES DETAIL IKS GROUP KOMPONEN:: M_IKS_GKOMPONEN_DETAIL 
+
 Route::get('/crud4/create4',[Crud4Controller::class,'create'])->name('crud4.create');
 Route::post('/crud4/store4',[Crud4Controller::class,'store'])->name('crud4.store');
 
