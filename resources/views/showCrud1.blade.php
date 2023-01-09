@@ -136,7 +136,7 @@ $(document).ready(function() {
 });
 
 
-function deleteDataDetail(id,elm){
+function deleteData(id,elm){
     console.log(elm);
     // buttonsmdisable(elm);
     CustomSwal.fire({
@@ -149,7 +149,11 @@ function deleteDataDetail(id,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
+<<<<<<< HEAD
                 url:"{{url('showCrud1')}}/"+id,
+=======
+                url:"{{url('show.delete')}}/",
+>>>>>>> 5aed8923b46f8a4ba0fd165e4eb0050da0bbcf01
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"
