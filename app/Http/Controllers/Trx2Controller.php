@@ -48,27 +48,27 @@ class Trx2Controller extends Controller
         return $response;
     }
 
-    // public function create(){
-    //     $icon = 'ni ni-dashlite';
-    //     $subtitle = 'Tambah Transaksi Komponen IKS ';
-    //     $iks = M_iks::all();
-    //     $gkomponen = M_iks_gkomponen::all();
-    //     $gkomponen_d = M_iks_gkomponen_detail::all();
-    //     $dkomponen = T_komponen_iks_d::all();
-    //     return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
-    // }
-
-    public function create8(Request $request){
-        $data = M_iks::find($request->id);
+    public function create(){
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Transaksi Komponen IKS ';
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
         $dkomponen = T_komponen_iks_d::all();
-        dd($data);
-        return view('createTrx2',compact('subtitle','icon','iks', 'data','gkomponen', 'gkomponen_d',  'dkomponen'));
+        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
     }
+
+    // public function create8(Request $request){
+    //     $data = M_iks::find($request->id);
+    //     $icon = 'ni ni-dashlite';
+    //     $subtitle = 'Tambah Transaksi Komponen IKS ';
+    //     $iks = M_iks::all();
+    //     $gkomponen = M_iks_gkomponen::all();
+    //     $gkomponen_d = M_iks_gkomponen_detail::all();
+    //     $dkomponen = T_komponen_iks_d::all();
+    //     dd($data);
+    //     return view('createTrx2',compact('subtitle','icon','iks', 'data','gkomponen', 'gkomponen_d',  'dkomponen'));
+    // }
 
 
     // public function getdetail (request $request){
@@ -82,26 +82,36 @@ class Trx2Controller extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());die;
-             
-        $data = $request->all();
-        $tkomponen = new T_komponen_iks(); 
-        $tkomponen->iks_id = $data['iks_id'];
-        $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
-        $tkomponen->group = $data['group'];
-        $tkomponen->save();
-        
-        $dkomponen = new T_komponen_iks_d();
-        $dkomponen->komponen_ikss_id=$tkomponen->id;
-        $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
-        $dkomponen->save();
 
-        if( ($request->all())){
+
+        if(T_komponen_iks::create($request->all())){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
         }
         return $response;
+        // dd($request->all());die;
+             
+        // $data = $request->all();
+        // $tkomponen = new T_komponen_iks(); 
+        // $tkomponen->iks_id = $data['iks_id'];
+        // $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
+        // $tkomponen->group = $data['group'];
+        // $tkomponen->save();
+        
+        // $dkomponen = new T_komponen_iks_d();
+        // $dkomponen->komponen_ikss_id=$tkomponen->id;
+        // $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
+        // $dkomponen->save();
+
+        // if( ($request->all())){
+        //     $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
+        // }else{
+        //     $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
+        // }
+        // return $response;
+
+        
 
     }  
 
@@ -111,47 +121,46 @@ class Trx2Controller extends Controller
         $subtitle = 'Edit Data Transaksi Komponen';
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
-        $dkomponen = T_komponen_iks_d::all();
-        $dkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $data->iks_gkomponen_id)->get();
-        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen', 'dkomponen', 'dkomponen_detail'));
+        // $dkomponen = T_komponen_iks_d::all();
+        // $dkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $data->iks_gkomponen_id)->get();
+        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen'));
     }
 
     public function update(Request $request,  $id)
     {
 
-        $tkomponen  = T_komponen_iks::with('dkomponen')->find($id);
-        // T_komponen_iks_d::where('komponen_ikss_id', $id)->delete();
-        $data=$request->all();
+        // $tkomponen  = T_komponen_iks::with('dkomponen')->find($id);
+        // $data=$request->all();
         
-        $tkomponen->update([
-            'iks_id' => $data['iks_id'],
-            'iks_gkomponen_id' => $data['iks_gkomponen_id'],
-            'group' => $data['group'],
-            // 'komponen_iks_detail' => $data['komponen_iks_detail']
-        ]);
+        // $tkomponen->update([
+        //     'iks_id' => $data['iks_id'],
+        //     'iks_gkomponen_id' => $data['iks_gkomponen_id'],
+        //     'group' => $data['group'],
+        // ]);
 
-        $dkomponen = T_komponen_iks_d::find($tkomponen->dkomponen->id);
-        $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
-        if($dkomponen->save()){
-            $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
-        }else{
-            $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
-        }
-        return $response;
+        // $dkomponen = T_komponen_iks_d::find($tkomponen->dkomponen->id);
+        // $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
+
+        // if($dkomponen->save()){
+        //     $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
+        // }else{
+        //     $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
+        // }
+        // return $response;
         // $dkomponen = new T_komponen_iks_d();
         // $dkomponen->komponen_ikss_id=$tkomponen->id;
         // $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
         // $dkomponen->save();
     
 
-        // $data = T_komponen_iks::find($id);
-        // if($data->fill($request->all())->save()) {
-        //     $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
-        // } else {
-        //     $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
-        // }
-        // return $response;
-        // return redirect('crud')->with('success',"Data berhasil diedit!");
+        $data = T_komponen_iks::find($id);
+        if($data->fill($request->all())->save()) {
+            $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
+        } else {
+            $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
+        }
+        return $response;
+        return redirect('crud')->with('success',"Data berhasil diedit!");
     }
 
     public function indexShow(Request $request){
