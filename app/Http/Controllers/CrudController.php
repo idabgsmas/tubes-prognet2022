@@ -119,11 +119,19 @@ class CrudController extends Controller
                 ->addColumn('aksi', function($data){
                     $aksi = "";
                     $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit2' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteDataDetail(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);
     }
     
+    public function deleteDataDetail(Request $request){
+        if(T_komponen_iks::destroy($request->id)){
+            $response = array('success'=>1,'msg'=>'Berhasil hapus data');
+        }else{
+            $response = array('success'=>2,'msg'=>'Gagal menghapus data');
+        }
+        return $response;
+    }
 }
