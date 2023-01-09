@@ -78,7 +78,7 @@
         
         <div class="mb-3">
             <label for="iks_id" class="form-label">IKS</label>
-            <select class="custom-select" id="data" name="data" aria-describedby="data" required>
+            <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
                 <option  disabled>IKS</option>
                 @foreach ($iks as $i)
                   <option value="{{ $i->id }}" @if($data->iks_id===$i->id) SELECTED @endif>{{ $data->nama }}</option>
@@ -114,9 +114,9 @@
             <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
         </div>
 
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <!-- <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a> -->
+        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
 </form>
 @endsection
 @push('script')
