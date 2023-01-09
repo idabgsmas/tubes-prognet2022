@@ -57,6 +57,7 @@ class Trx2Controller extends Controller
         $dkomponen = T_komponen_iks_d::all();
         return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
     }
+
     public function create8(Request $request){
         $data = M_iks::with('tkomponen')->find($request->id);
         $icon = 'ni ni-dashlite';
