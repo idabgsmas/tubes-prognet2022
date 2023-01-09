@@ -48,7 +48,16 @@ class Trx2Controller extends Controller
         return $response;
     }
 
-    public function create(Request $request){
+    public function create(){
+        $icon = 'ni ni-dashlite';
+        $subtitle = 'Tambah Transaksi Komponen IKS ';
+        $iks = M_iks::all();
+        $gkomponen = M_iks_gkomponen::all();
+        $gkomponen_d = M_iks_gkomponen_detail::all();
+        $dkomponen = T_komponen_iks_d::all();
+        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
+    }
+    public function create8(Request $request){
         $data = M_iks::with('tkomponen')->find($request->id);
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Transaksi Komponen IKS ';
@@ -58,6 +67,7 @@ class Trx2Controller extends Controller
         $dkomponen = T_komponen_iks_d::all();
         return view('createTrx2',compact('subtitle','icon','iks', 'data','gkomponen', 'gkomponen_d',  'dkomponen'));
     }
+
 
     // public function getdetail (request $request){
     //     $gkomponen_id = $request->gkomponen_id;
