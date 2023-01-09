@@ -26,8 +26,12 @@ Route::get('/',function(){
 // Routes 1 untuk M_IKS
 Route::get('/crud',[CrudController::class,'index'])->name('crud.list');
 
+Route::get('/crud/{id}/show1',[CrudController::class,'indexShow'])->name('crud.show');
+Route::post('/crud/showList1',[CrudController:: class,'showList'])->name('crud.showList');
+
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
 Route::post('/crud/store',[CrudController::class,'store'])->name('crud.store');
+
 
 Route::get('/crud/{id}/edit',[CrudController::class,'edit'])->name('crud.edit');
 Route::post('crud/update/{id}',[CrudController::class,'update'])->name('crud.update');
@@ -114,7 +118,7 @@ Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.s
 Route::get('/trx2/detail-iks/{id}',[Trx2Controller::class, 'getDetailIKS']);
 
 Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
-Route::get('/trx2/{id}/create8',[Trx2Controller::class,'create8'])->name('trx2.create8');
+// Route::get('/trx2/{id}/create8',[Trx2Controller::class,'create8'])->name('trx2.create8');
 Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
 
 Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit');

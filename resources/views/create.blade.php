@@ -75,6 +75,15 @@
             <input name="nama" type="text" class="form-control" id="nama" aria-describedby="nama" required>
         </div>
         <div class="mb-3">
+            <label for="provider_id" class="form-label">Provider</label>
+            <select class="custom-select" id="provider_id" name="provider_id" aria-describedby="provider_id" required>
+                <option selected disabled>Pilih Provider IKS</option>
+                @foreach ($provider as $provider)
+                  <option value="{{ $provider->id }}">{{ $provider->provider }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="penjamin_id" class="form-label">Jaminan</label>
             <select class="custom-select" id="penjamin_id" name="penjamin_id" aria-describedby="penjamin_id" required>
                 <option selected disabled>Pilih Jaminan</option>
@@ -92,15 +101,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
-            <label for="provider_id" class="form-label">Tipe IKS</label>
-            <select class="custom-select" id="provider_id" name="provider_id" aria-describedby="provider_id" required>
-                <option selected disabled>Pilih Provider IKS</option>
-                @foreach ($provider as $provider)
-                  <option value="{{ $provider->id }}">{{ $provider->provider }}</option>
-                @endforeach
-            </select>
-        </div>
+
         <div class="mb-3">
             <label for="status_aktif" class="form-label">Status Aktif</label>
             <select class="custom-select" id="status_aktif" name="status_aktif" aria-describedby="status_aktif" required>

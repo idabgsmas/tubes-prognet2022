@@ -21,7 +21,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('crud.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -66,7 +66,7 @@
 <!-- </div> -->
 <form method="POST" action="/trx2/store7" enctype="multipart/form-data">
     @csrf
-        <!-- <div class="mb-3">
+        <div class="mb-3">
             <label for="iks_id" class="form-label">IKS</label>
             <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
              <option selected disabled>Pilih IKS</option>
@@ -74,19 +74,10 @@
                   <option value="{{ $i->id }}">{{ $i->nama }}</option>
                 @endforeach
               </select>
-        </div> -->
-        
-        <div class="mb-3">
-            <label for="iks_id" class="form-label">IKS</label>
-            <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
-                <option  disabled>IKS</option>
-                @foreach ($iks as $i)
-                  <option value="{{ $i->id }}" @if($data->iks_id===$i->id) SELECTED @endif>{{ $data->nama }}</option>
-                @endforeach
-            </select>
-            <!-- <input name="iks_id" type="text" value="{{ $data['nama'] }}" class="form-control" id="iks_id" aria-describedby="iks_id"> -->
         </div>
-  
+        <!-- <div class="mb-3">
+            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+        </div> -->
         <div class="mb-3">
             <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>
             <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
@@ -114,9 +105,9 @@
             <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
         </div>
 
-        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+        <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
+        <!-- <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a> -->
 </form>
 @endsection
 @push('script')

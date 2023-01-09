@@ -8,6 +8,7 @@ use App\Models\M_iks;
 use App\Models\M_iks_tipe;
 use App\Models\M_penjamin;
 use App\Models\M_Provider;
+use App\Models\T_komponen_iks;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -28,7 +29,7 @@ class CrudController extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Transaksi' href='/trx2/".$data->id."/create8' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-shopping-cart-full' ></i></a>";
+                    $aksi .= "<a title='Transaksi' href='/crud/".$data->id."/show1' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-shopping-cart-full' ></i></a>";
                     $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",\"{$data->kode}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' data-kode='{$data->kode}'><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
@@ -99,18 +100,30 @@ class CrudController extends Controller
         // return redirect('crud')->with('success',"Data berhasil diedit!");
     }
 
+    // DATA TRANSAKSI KOMPONEN IKS
     public function indexShow(Request $request){
         $data = M_iks::find($request->id);
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Detail Transaksi Komponen IKS';
+        $subtitle = 'Data Transaksi Komponen IKS';
         $table_id = 't_komponen_ikss';
-        return view('createTrx2',compact('subtitle', 'data','penjamin','tipe_iks', 'provider', 'table_id','icon'));
+        return view('showCrud1',compact('subtitle', 'data', 'table_id','icon'));
     }
 
-
-    public function getDetailIKS($id){
-        $data = M_iks::where('iks_id', $id)->get();
-        return json_encode($data);
+    public function showList(Request $request){
+        // $dkomponen  = T_komponen_iks_d::find($id);
+        $data = T_komponen_iks::select(['id','iks_id', 'iks_gkomponen_id', 'group'])->where('iks_id', $request->id)
+        ->with(['iks']);
+        $datatables = DataTables::of($data);
+        return $datatables
+                ->addIndexColumn()
+                ->addColumn('aksi', function($data){
+                    $aksi = "";
+                    $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit2' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteDataDetail(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    return $aksi;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
     }
     
 }
