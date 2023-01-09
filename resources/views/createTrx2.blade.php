@@ -75,6 +75,18 @@
                 @endforeach
               </select>
         </div>
+
+        <!-- <div class="mb-3">
+            <label for="iks_id" class="form-label">IKS</label>
+            <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
+                <option  disabled>IKS</option>
+                @foreach ($iks as $i)
+                  <option value="{{ $i->id }}" @if($data->iks_id===$i->id) SELECTED @endif>{{ $data->nama }}</option>
+                @endforeach
+            </select>
+            <input name="iks_id" type="text" value="{{ $data['nama'] }}" class="form-control" id="iks_id" aria-describedby="iks_id">
+        </div> -->
+
         <!-- <div class="mb-3">
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
         </div> -->
