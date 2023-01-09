@@ -149,11 +149,9 @@ function deleteData(id,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-<<<<<<< HEAD
-                url:"{{url('showCrud1')}}/"+id,
-=======
-                url:"{{url('show.delete')}}/",
->>>>>>> 5aed8923b46f8a4ba0fd165e4eb0050da0bbcf01
+                // url:"{{url('showCrud1')}}/"+id,
+                // url:"{{url('show.delete')}}/",
+                url:"{{url('trx2')}}/"+id,
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"
