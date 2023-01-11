@@ -30,7 +30,7 @@ Route::get('/crud',[CrudController::class,'index'])->name('crud.list');
 
 Route::get('/crud/{id}/show1',[CrudController::class,'indexShow'])->name('crud.show');
 Route::post('/crud/showList1',[CrudController:: class,'showList'])->name('crud.showList');
-Route::delete('/crud/{id}',[CrudController::class,'deleteDataDetail'])->name('show.delete');
+// Route::delete('/trx2/{id}',[CrudController::class,'deleteDataDetail'])->name('show.delete');
 
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
 Route::post('/crud/store',[CrudController::class,'store'])->name('crud.store');

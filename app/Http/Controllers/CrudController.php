@@ -126,12 +126,12 @@ class CrudController extends Controller
                 ->make(true);
     }
     
-    public function deleteDataDetail(Request $request){
-        if(T_komponen_iks::destroy($request->id)){
-            $response = array('success'=>1,'msg'=>'Berhasil hapus data');
-        }else{
-            $response = array('success'=>2,'msg'=>'Gagal menghapus data');
-        }
-        return $response;
-    }
+    // public function deleteDataDetail(Request $request){
+    //     if(T_komponen_iks::destroy($request->id)){
+    //         $response = array('success'=>1,'msg'=>'Berhasil hapus data');
+    //     }else{
+    //         $response = array('success'=>2,'msg'=>'Gagal menghapus data');
+    //     }
+    //     return $response;
+    // }
 }
