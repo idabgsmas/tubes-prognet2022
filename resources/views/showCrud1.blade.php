@@ -16,7 +16,7 @@
             <a href="{{ route('crud.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
         <div class="btn-group">
-            <a href="{{ route('trx2.create') }}" class="btn btn-sm btn-success" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            <a href="{{ route('trxd2.create2') }}" class="btn btn-sm btn-success" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
         </div>
     </div>
 </div> 
@@ -149,11 +149,7 @@ function deleteData(id,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-<<<<<<< HEAD
-                url:"{{url('showCrud1')}}/"+id,
-=======
                 url:"{{url('show.delete')}}/",
->>>>>>> 5aed8923b46f8a4ba0fd165e4eb0050da0bbcf01
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"
