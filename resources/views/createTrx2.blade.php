@@ -159,7 +159,7 @@ function store(){
                 }
             });
         }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+            // CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
             console.log(error.XMLHttpRequest);
         }
     });
