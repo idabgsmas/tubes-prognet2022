@@ -90,7 +90,6 @@ Route::post('crud4/update4/{id}',[Crud4Controller::class,'update'])->name('crud4
 Route::delete('/crud4/{id}',[Crud4Controller::class,'deleteData'])->name('crud4.delete');
 Route::post('/crud4/listData4',[Crud4Controller::class,'listData'])->name('crud4.listData');
 
-
 // Routes 5 untuk M_IKS_GKOMPONEN_DETAIL
 Route::get('/crud5',[Crud5Controller::class,'index'])->name('crud5.list');
 
