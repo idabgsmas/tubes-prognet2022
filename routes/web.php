@@ -141,4 +141,5 @@ Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.l
 
 Route::get('/trxd2/create8',[TrxdController::class,'create'])->name('trxd2.create');
 Route::post('/trxd2/store8',[TrxdController::class,'store'])->name('trxd2.store');
+Route::delete('/trxd2/{id}',[TrxdController::class,'deleteData'])->name('trxd2.delete');
 

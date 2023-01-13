@@ -21,7 +21,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="javascript:history.back()" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -69,11 +69,11 @@
         <div class="mb-3">
             <label for="iks_id" class="form-label">IKS</label>
             <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
-             <option selected disabled>Pilih IKS</option>
+            <option selected disabled>Pilih IKS</option>
                 @foreach ($iks as $i)
                   <option value="{{ $i->id }}">{{ $i->nama }}</option>
                 @endforeach
-              </select>
+            </select>
         </div>
 
 
@@ -146,7 +146,10 @@ function store(){
                 success:function(data){
                     if(data.success == 1){
                         CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('trx2') }}");
+                        // window.location.replace("{{ url('trx2') }}");
+                        // var url = '{{ route("crud.show", ":show1") }}';
+                        // url = url.replace(':show1', show1);
+                        window.location.href="javascript:history.back()";
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
