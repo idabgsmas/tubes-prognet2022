@@ -16,7 +16,7 @@
             <a href="{{ route('crud.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
         <div class="btn-group">
-            <a href="{{ route('trxd2.create2') }}" class="btn btn-sm btn-success" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
+            <a href="{{ route('trx2.create') }}" class="btn btn-sm btn-success" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
         </div>
     </div>
 </div> 
