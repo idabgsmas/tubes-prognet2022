@@ -16,6 +16,7 @@ class CrudController extends Controller
 {
     public function index(){
         $icon = 'ni ni-dashlite';
+        $iconn = 'ni clock';
         $subtitle = 'IKS';
         $table_id = 'm_ikss';
         return view('crud',compact('subtitle','table_id','icon'));
@@ -104,9 +105,11 @@ class CrudController extends Controller
     public function indexShow(Request $request){
         $data = M_iks::find($request->id);
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Data Transaksi Komponen IKS';
+        $jam = 'icon ni ni-clock';
+        $subtitle = 'Transaksi Komponen IKS >> ';
+        $subtitle2 = 'Valid Until: ';
         $table_id = 't_komponen_ikss';
-        return view('showCrud1',compact('subtitle', 'data', 'table_id','icon'));
+        return view('showCrud1',compact('subtitle', 'subtitle2',  'data', 'jam' ,'table_id','icon'));
     }
 
     public function showList(Request $request){
