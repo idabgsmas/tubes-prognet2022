@@ -1,4 +1,4 @@
-<!-- INI HALAMAN UTAMA UNTUK CREATE DETAIL DATA TABEL M_IKS -->
+<!-- INI HALAMAN UTAMA UNTUK EDIT TRANSAKSI KOMPONEN IKS -->
 
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
@@ -7,8 +7,6 @@
 
 @endsection
 @section('content')
-
-
 <div class="nk-fmg-body-head d-none d-lg-flex">
     <div class="nk-fmg-search">
         <!-- <em class="icon ni ni-search"></em> -->
@@ -24,6 +22,7 @@
             <a href="javascript:history.back()" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
+
 </div>
 <div class="row gy-3 d-none" id="loaderspin">
     <div class="col-md-12">
@@ -59,94 +58,54 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                Form Input Transaksi Komponen IKS
+                Form Edit Transaksi Komponen IKS 
             </div>
         </div>
     </div>
 <!-- </div> -->
-<form method="POST" action="/trxd2/store8" enctype="multipart/form-data">
-    @csrf
+
+<form method="POST" action="/trxd2/update8/{{ $data->id }}" enctype="multipart/form-data">
+    @csrf   
        
         <div class="mb-3">
-            <label for="komponen_ikss_id" class="form-label">Transaksi IKS</label>
-            <select class="custom-select" id="komponen_ikss_id" name="komponen_ikss_id" aria-describedby="komponen_ikss_id" required>
-                <option selected disabled>Transaksi Komponen IKS</option>
-                @foreach ($tkomponen as $t)
-                  <option value="{{ $t->id }}">{{ $t->id }}</option>
+            <label for="iks_gkomponen_id" class="form-label">Group Komponen</label>
+            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
+                <option disabled value="0">Pilih id Group Komponen</option>
+                @foreach ($gkomponen as $g)
+                  <option value="{{ $g->id }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
                 @endforeach
-            </select>
+              </select>
         </div>
+        <!-- <div class="mb-3">
+            <label for="group" class="form-label">Group</label>
+            <select class="custom-select" id="group" name="group" aria-describedby="group" required>
+                <option disabled value="0">Pilih id Group Komponen</option>
+                @foreach ($gkomponen as $g)
+                  <option value="{{ $g->group }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
+                @endforeach
+              </select>
+        </div> -->
+        <input type="hidden" name="group" id="group" value="{{ $data->group }}" />
+
+
         <div class="mb-3">
             <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
-            <!-- <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
-                <option disabled>Pilih Detail Group Komponen IKS</option>
-            </select> -->
-            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+            <label for="gkomponen_detail" class="form-label">Detail Group Komponen</label>
+            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail" value="{{ $data['komponen_iks_detail'] }}">
         </div>
-
-        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <!-- <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a> -->
 </form>
+
 @endsection
+
 @push('script')
 <script>
-
-$(function () {
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-    });
-});
-
-function store(){
-    // buttonsmdisable(elm);
-    CustomSwal.fire({
-        icon:'question',
-        text: 'Data Sudah Benar?' ,
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        cancelButtonText: 'Batal',
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            $.ajax({
-                url:"{{url('/trxd2/store8')}}/",
-                data:{
-                    _method:"POST",
-                    _token:"{{csrf_token()}}",
-                    komponen_ikss_id:$("#komponen_ikss_id").val(),
-                    // iks_gkomponen_id:$("#iks_gkomponen_id").val(),
-                    komponen_iks_detail:$("#komponen_iks_detail").val(),
-                },
-                type:"POST",
-                dataType:"JSON",
-                success:function(data){
-                    if(data.success == 1){
-                        CustomSwal.fire('Sukses', data.msg, 'success');
-                        // window.location.replace("{{ url('trx2') }}");
-                        window.location.href="javascript:history.back()";
-                    }else{
-                        CustomSwal.fire('Gagal', data.msg, 'error');
-                    }
-                },
-                error:function(error){
-                    CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-                    console.log(error.XMLHttpRequest);
-                }
-            });
-        }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-            console.log(error.XMLHttpRequest);
-        }
-    });
-}
-
-$(function() {
-    
-    $('#iks_gkomponen_id').on('change',function(){
-        $('#komponen_iks_detail').val($('#iks_gkomponen_id option:selected').text());
+$('#iks_gkomponen_id').on('change',function(){
+        $('#group').val($('#iks_gkomponen_id option:selected').text());
         $('#komponen_iks_detail').empty();
-        $.get("{{ url('trxd2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
+        $.get("{{ url('trx2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
             $.each(JSON.parse(data), function(key, val){
                 $('#komponen_iks_detail').append($('<option>', { 
                     value: val.gkomponen_detail,
@@ -156,8 +115,44 @@ $(function() {
         });
         
     })
-})
 
+// function update(id){
+//     // buttonsmdisable(elm);
+//     CustomSwal.fire({
+//         icon:'question',
+//         text: 'Edit data '+$("#komponen_iks_detail").val()+' ?',
+//         showCancelButton: true,
+//         confirmButtonText: 'Simpan',
+//         cancelButtonText: 'Batal',
+//     }).then((result) => {
+//         /* Read more about isConfirmed, isDenied below */
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 url:"{{url('trxd2/update8')}}/"+id,
+//                 data:{
+//                     _method:"POST",
+//                     _token:"{{csrf_token()}}",
+//                     komponen_iks_detail:$("#komponen_iks_detail").val()
+//                 },
+//                 type:"POST",
+//                 dataType:"JSON",
+//                 success:function(data){
+//                     if(data.success == 1){
+//                         CustomSwal.fire('Sukses', data.msg, 'success');
+//                         // window.location.replace("{{ url('trx2') }}");
+//                         window.location.href="javascript:history.back()";
+//                     }else{
+//                         CustomSwal.fire('Gagal', data.msg, 'error');
+//                     }
+//                 },
+//                 error:function(error){
+//                     CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+//                     console.log(error.XMLHttpRequest);
+//                 }
+//             });
+//         }else{
+//         }
+//     });
+// }
 </script>
 @endpush
-
