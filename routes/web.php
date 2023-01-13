@@ -35,6 +35,8 @@ Route::post('/crud/showList1',[CrudController:: class,'showList'])->name('crud.s
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
 Route::post('/crud/store',[CrudController::class,'store'])->name('crud.store');
 
+// Route::get('/crud/{id}/create2',[Trx2Controller::class,'create8'])->name('crud.create2');
+
 
 Route::get('/crud/{id}/edit',[CrudController::class,'edit'])->name('crud.edit');
 Route::post('crud/update/{id}',[CrudController::class,'update'])->name('crud.update');
@@ -120,6 +122,7 @@ Route::get('/trx2/{id}/show7',[Trx2Controller::class,'indexShow'])->name('trx2.s
 Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.showList');
 Route::get('/trx2/detail-iks/{id}',[TrxdController::class, 'getDetailIKS']);
 
+// Routes untuk na,bah detail transaksi
 Route::get('/trx2/create8',[TrxdController::class,'create'])->name('trxd2.create2');
 Route::get('/trx2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit2');
 
