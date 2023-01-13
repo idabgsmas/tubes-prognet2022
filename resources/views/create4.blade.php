@@ -105,8 +105,9 @@ function store(){
                 dataType:"JSON",
                 success:function(data){
                     if(data.success == 1){
-                        CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('crud4') }}");
+                        CustomSwal.fire('Sukses', data.msg, 'success').then(function() {
+                            window.location.replace("{{ url('crud4') }}");
+                        });
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
