@@ -73,10 +73,11 @@ $(document).ready(function() {
         serverSide: true,
         dom: '<"row justify-between g-2 "<"col-7 col-sm-4 text-left"f><"col-5 col-sm-8 text-right"<"datatable-filter"<"d-flex justify-content-end g-2" l>>>><" my-3"t><"row align-items-center"<"col-5 col-sm-12 col-md-6 text-left text-md-left"i><"col-5 col-sm-12 col-md-6 text-md-right"<"d-flex justify-content-end "p>>>',
         ajax: {
-            url: '{{ route("crud5.listData") }}',
+            url: '{{ route("crud4.showList") }}',
             type:"POST",
             data: function(params) {
                 params._token = "{{ csrf_token() }}";
+                params.id = {{ $data->id }}
             }
         },
         columns: [
@@ -116,7 +117,7 @@ $(document).ready(function() {
 });
 
 
-function deleteData(id,gkomponen_detail,elm){
+function deleteDataDetail(id,gkomponen_detail,elm){
     console.log(elm);
     // buttonsmdisable(elm);
     CustomSwal.fire({

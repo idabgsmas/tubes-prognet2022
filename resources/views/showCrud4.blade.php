@@ -13,7 +13,7 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('crud4.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="javascript:history.back()" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
         <div class="btn-group">
             <a href="{{ route('crud4.create2') }}" class="btn btn-sm btn-success" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
@@ -127,7 +127,7 @@ $(document).ready(function() {
 });
 
 
-function deleteDataDetail(id,elm){
+function deleteDataDetail(id,gkomponen_detail,elm){
     console.log(elm);
     // buttonsmdisable(elm);
     CustomSwal.fire({
@@ -140,7 +140,7 @@ function deleteDataDetail(id,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('crud4')}}/"+id,
+                url:"{{url('crud5')}}/"+id,
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"
