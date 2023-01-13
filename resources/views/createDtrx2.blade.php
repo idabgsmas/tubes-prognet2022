@@ -1,4 +1,4 @@
-<!-- INI HALAMAN UTAMA UNTUK CREATE DATA TABEL M_IKS -->
+<!-- INI HALAMAN UTAMA UNTUK CREATE DETAIL DATA TABEL M_IKS -->
 
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
@@ -64,48 +64,25 @@
         </div>
     </div>
 <!-- </div> -->
-<form method="POST" action="/trx2/store7" enctype="multipart/form-data">
+<form method="POST" action="/trxd2/store8" enctype="multipart/form-data">
     @csrf
+       
         <div class="mb-3">
-            <label for="iks_id" class="form-label">IKS</label>
-            <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
-            <option selected disabled>Pilih IKS</option>
-                @foreach ($iks as $i)
-                  <option value="{{ $i->id }}">{{ $i->nama }}</option>
+            <label for="komponen_ikss_id" class="form-label">Transaksi IKS</label>
+            <select class="custom-select" id="komponen_ikss_id" name="komponen_ikss_id" aria-describedby="komponen_ikss_id" required>
+                <option selected disabled>Transaksi Komponen IKS</option>
+                @foreach ($tkomponen as $t)
+                  <option value="{{ $t->id }}">{{ $t->id }}</option>
                 @endforeach
             </select>
         </div>
-
-
-        <!-- <div class="mb-3">
-            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
-        </div> -->
         <div class="mb-3">
-            <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>
-            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
-                <option selected disabled>Pilih Group Komponen IKS</option>
-                @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}">{{ $g->group }}</option>
-                @endforeach
-            </select>
-        </div>
-        <input type="hidden" name="group" id="group" />
-        <!-- <div class="mb-3">
-            <label for="group" class="form-label">Group</label>
-            <select class="custom-select" id="group" name="group" aria-describedby="group" required>
-                <option selected disabled>Group Komponen IKS</option>
-                @foreach ($gkomponen as $g)
-                  <option value="{{ $g->group }}">{{ $g->group }}</option>
-                @endforeach
-            </select>
-        </div> -->
-        <!-- <div class="mb-3">
             <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
-            <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
+            <!-- <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
                 <option disabled>Pilih Detail Group Komponen IKS</option>
-            </select>
+            </select> -->
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
-        </div> -->
+        </div>
 
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
@@ -133,13 +110,13 @@ function store(){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('/trx2/store7')}}/",
+                url:"{{url('/trxd2/store8')}}/",
                 data:{
                     _method:"POST",
                     _token:"{{csrf_token()}}",
-                    iks_id:$("#iks_id").val(),
-                    iks_gkomponen_id:$("#iks_gkomponen_id").val(),
-                    group:$("#group").val(),
+                    komponen_ikss_id:$("#komponen_ikss_id").val(),
+                    // iks_gkomponen_id:$("#iks_gkomponen_id").val(),
+                    komponen_iks_detail:$("#komponen_iks_detail").val(),
                 },
                 type:"POST",
                 dataType:"JSON",
@@ -147,8 +124,6 @@ function store(){
                     if(data.success == 1){
                         CustomSwal.fire('Sukses', data.msg, 'success');
                         // window.location.replace("{{ url('trx2') }}");
-                        // var url = '{{ route("crud.show", ":show1") }}';
-                        // url = url.replace(':show1', show1);
                         window.location.href="javascript:history.back()";
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
@@ -169,9 +144,9 @@ function store(){
 $(function() {
     
     $('#iks_gkomponen_id').on('change',function(){
-        $('#group').val($('#iks_gkomponen_id option:selected').text());
+        $('#komponen_iks_detail').val($('#iks_gkomponen_id option:selected').text());
         $('#komponen_iks_detail').empty();
-        $.get("{{ url('trx2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
+        $.get("{{ url('trxd2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
             $.each(JSON.parse(data), function(key, val){
                 $('#komponen_iks_detail').append($('<option>', { 
                     value: val.gkomponen_detail,

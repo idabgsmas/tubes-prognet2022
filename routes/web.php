@@ -7,6 +7,8 @@ use App\Http\Controllers\Crud4Controller;
 use App\Http\Controllers\Crud5Controller;
 use App\Http\Controllers\Crud6Controller;
 use App\Http\Controllers\Trx2Controller;
+use App\Http\Controllers\Trxd2Controller;
+use App\Http\Controllers\TrxdController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +30,12 @@ Route::get('/crud',[CrudController::class,'index'])->name('crud.list');
 
 Route::get('/crud/{id}/show1',[CrudController::class,'indexShow'])->name('crud.show');
 Route::post('/crud/showList1',[CrudController:: class,'showList'])->name('crud.showList');
+// Route::delete('/trx2/{id}',[CrudController::class,'deleteDataDetail'])->name('show.delete');
 
 Route::get('/crud/create',[CrudController::class,'create'])->name('crud.create');
 Route::post('/crud/store',[CrudController::class,'store'])->name('crud.store');
+
+// Route::get('/crud/{id}/create2',[Trx2Controller::class,'create8'])->name('crud.create2');
 
 
 Route::get('/crud/{id}/edit',[CrudController::class,'edit'])->name('crud.edit');
@@ -115,15 +120,29 @@ Route::get('/trx2',[Trx2Controller::class,'index'])->name('trx2.list');
 
 Route::get('/trx2/{id}/show7',[Trx2Controller::class,'indexShow'])->name('trx2.show');
 Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.showList');
-Route::get('/trx2/detail-iks/{id}',[Trx2Controller::class, 'getDetailIKS']);
+Route::get('/trx2/detail-iks/{id}',[TrxdController::class, 'getDetailIKS']);
+
+// Routes untuk na,bah detail transaksi
+Route::get('/trx2/create8',[TrxdController::class,'create'])->name('trxd2.create2');
+Route::get('/trx2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit2');
+
 
 Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
-// Route::get('/trx2/{id}/create8',[Trx2Controller::class,'create8'])->name('trx2.create8');
 Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
 
 Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit');
 Route::post('trx2/update7/{id}',[Trx2Controller::class,'update'])->name('trx2.update');
-
+ 
 Route::delete('/trx2/{id}',[Trx2Controller::class,'deleteData'])->name('trx2.delete');
 Route::post('/trx2/listData7',[Trx2Controller:: class,'listData'])->name('trx2.listData');
 
+
+// Routes Detail Transaksi
+
+Route::get('/trxd2/create8',[TrxdController::class,'create'])->name('trxd2.create');
+Route::post('/trxd2/store8',[TrxdController::class,'store'])->name('trxd2.store');
+
+Route::delete('/trxd2/{id}',[TrxdController::class,'deleteData'])->name('trxd2.delete');
+
+Route::get('/trxd2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit');
+Route::post('trxd2/update8/{id}',[TrxdController::class,'update'])->name('trxd2.update');

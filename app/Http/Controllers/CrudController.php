@@ -16,6 +16,7 @@ class CrudController extends Controller
 {
     public function index(){
         $icon = 'ni ni-dashlite';
+        $iconn = 'ni clock';
         $subtitle = 'IKS';
         $table_id = 'm_ikss';
         return view('crud',compact('subtitle','table_id','icon'));
@@ -104,9 +105,11 @@ class CrudController extends Controller
     public function indexShow(Request $request){
         $data = M_iks::find($request->id);
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Data Transaksi Komponen IKS';
+        $jam = 'icon ni ni-clock';
+        $subtitle = 'Transaksi Komponen IKS >> ';
+        $subtitle2 = 'Valid Until: ';
         $table_id = 't_komponen_ikss';
-        return view('showCrud1',compact('subtitle', 'data', 'table_id','icon'));
+        return view('showCrud1',compact('subtitle', 'subtitle2',  'data', 'jam' ,'table_id','icon'));
     }
 
     public function showList(Request $request){
@@ -118,12 +121,20 @@ class CrudController extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
-                    $aksi .= "<a title='Edit Data' href='/crud/".$data->id."/edit2' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteDataDetail(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                    $aksi .= "<a title='Detail Data Transaksi' href='/trx2/".$data->id."/show7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
+                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);
     }
     
+    // public function deleteDataDetail(Request $request){
+    //     if(T_komponen_iks::destroy($request->id)){
+    //         $response = array('success'=>1,'msg'=>'Berhasil hapus data');
+    //     }else{
+    //         $response = array('success'=>2,'msg'=>'Gagal menghapus data');
+    //     }
+    //     return $response;
+    // }
 }

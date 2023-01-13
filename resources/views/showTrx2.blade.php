@@ -13,7 +13,10 @@
     </div>
     <div class="nk-fmg-actions">
         <div class="btn-group">
-            <a href="{{ route('trx2.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="javascript:history.back()" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+        </div>
+        <div class="btn-group">
+            <a href="{{ route('trxd2.create2') }}" class="btn btn-sm btn-success" onclick="buttondisable(this)"><em class="icon fas fa-plus"></em> <span>Add Data</span></a>
         </div>
     </div>
 </div> 
@@ -51,7 +54,7 @@
                             <th width="10%">ID</th>
                             <th width="10%">ID Transaksi</th>
                             <th width="10%">Detail Transaksi</th>
-                            <!-- <th width="10%">Aksi</th> -->
+                            <th width="10%">Aksi</th>
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -102,14 +105,14 @@ $(document).ready(function() {
                 orderable: true,
                 searchable: true,
                 class: 'text-left'
+            },
+            {
+                data: 'aksi',
+                name: 'aksi',
+                orderable: false,
+                searchable: false,
+                class: 'text-center'
             }
-            // {
-            //     data: 'aksi',
-            //     name: 'aksi',
-            //     orderable: false,
-            //     searchable: false,
-            //     class: 'text-center'
-            // }
         ],
     });
     
@@ -130,7 +133,7 @@ function deleteData(id,elm){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('trx2')}}/"+id,
+                url:"{{url('trxd2')}}/"+id,
                 data:{
                     _method:"DELETE",
                     _token:"{{csrf_token()}}"

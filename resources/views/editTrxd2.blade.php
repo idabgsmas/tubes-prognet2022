@@ -1,4 +1,4 @@
-<!-- INI HALAMAN UTAMA UNTUK CREATE DATA TABEL M_IKS -->
+<!-- INI HALAMAN UTAMA UNTUK EDIT TRANSAKSI KOMPONEN IKS -->
 
 {{-- https://www.positronx.io/laravel-datatables-example/ --}}
 
@@ -7,8 +7,6 @@
 
 @endsection
 @section('content')
-
-
 <div class="nk-fmg-body-head d-none d-lg-flex">
     <div class="nk-fmg-search">
         <!-- <em class="icon ni ni-search"></em> -->
@@ -24,6 +22,7 @@
             <a href="javascript:history.back()" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
+
 </div>
 <div class="row gy-3 d-none" id="loaderspin">
     <div class="col-md-12">
@@ -59,116 +58,51 @@
     <div class="nk-fmg-quick-list nk-block">
         <div class="card">
             <div class="card-body">
-                Form Input Transaksi Komponen IKS
+                Form Edit Transaksi Komponen IKS 
             </div>
         </div>
     </div>
 <!-- </div> -->
-<form method="POST" action="/trx2/store7" enctype="multipart/form-data">
-    @csrf
-        <div class="mb-3">
-            <label for="iks_id" class="form-label">IKS</label>
-            <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
-            <option selected disabled>Pilih IKS</option>
-                @foreach ($iks as $i)
-                  <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                @endforeach
-            </select>
-        </div>
 
-
-        <!-- <div class="mb-3">
-            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
-        </div> -->
+<form method="POST" action="/trxd2/update8/{{ $data->id }}" enctype="multipart/form-data">
+    @csrf   
+       
         <div class="mb-3">
-            <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>
+            <label for="iks_gkomponen_id" class="form-label">Group Komponen</label>
             <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
-                <option selected disabled>Pilih Group Komponen IKS</option>
+                <option disabled value="0">Pilih id Group Komponen</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}">{{ $g->group }}</option>
+                  <option value="{{ $g->id }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
                 @endforeach
-            </select>
+              </select>
         </div>
-        <input type="hidden" name="group" id="group" />
         <!-- <div class="mb-3">
             <label for="group" class="form-label">Group</label>
             <select class="custom-select" id="group" name="group" aria-describedby="group" required>
-                <option selected disabled>Group Komponen IKS</option>
+                <option disabled value="0">Pilih id Group Komponen</option>
                 @foreach ($gkomponen as $g)
-                  <option value="{{ $g->group }}">{{ $g->group }}</option>
+                  <option value="{{ $g->group }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
                 @endforeach
-            </select>
+              </select>
         </div> -->
-        <!-- <div class="mb-3">
-            <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
-            <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
-                <option disabled>Pilih Detail Group Komponen IKS</option>
-            </select>
-            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
-        </div> -->
+        <input type="hidden" name="group" id="group" value="{{ $data->group }}" />
 
-        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+
+        <div class="mb-3">
+            <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
+            <label for="gkomponen_detail" class="form-label">Detail Group Komponen</label>
+            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail" value="{{ $data['komponen_iks_detail'] }}">
+        </div>
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <!-- <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a> -->
 </form>
+
 @endsection
+
 @push('script')
 <script>
-
-$(function () {
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-    });
-});
-
-function store(){
-    // buttonsmdisable(elm);
-    CustomSwal.fire({
-        icon:'question',
-        text: 'Data Sudah Benar?' ,
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        cancelButtonText: 'Batal',
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            $.ajax({
-                url:"{{url('/trx2/store7')}}/",
-                data:{
-                    _method:"POST",
-                    _token:"{{csrf_token()}}",
-                    iks_id:$("#iks_id").val(),
-                    iks_gkomponen_id:$("#iks_gkomponen_id").val(),
-                    group:$("#group").val(),
-                },
-                type:"POST",
-                dataType:"JSON",
-                success:function(data){
-                    if(data.success == 1){
-                        CustomSwal.fire('Sukses', data.msg, 'success');
-                        // window.location.replace("{{ url('trx2') }}");
-                        // var url = '{{ route("crud.show", ":show1") }}';
-                        // url = url.replace(':show1', show1);
-                        window.location.href="javascript:history.back()";
-                    }else{
-                        CustomSwal.fire('Gagal', data.msg, 'error');
-                    }
-                },
-                error:function(error){
-                    CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-                    console.log(error.XMLHttpRequest);
-                }
-            });
-        }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-            console.log(error.XMLHttpRequest);
-        }
-    });
-}
-
-$(function() {
-    
-    $('#iks_gkomponen_id').on('change',function(){
+$('#iks_gkomponen_id').on('change',function(){
         $('#group').val($('#iks_gkomponen_id option:selected').text());
         $('#komponen_iks_detail').empty();
         $.get("{{ url('trx2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
@@ -181,8 +115,44 @@ $(function() {
         });
         
     })
-})
 
+// function update(id){
+//     // buttonsmdisable(elm);
+//     CustomSwal.fire({
+//         icon:'question',
+//         text: 'Edit data '+$("#komponen_iks_detail").val()+' ?',
+//         showCancelButton: true,
+//         confirmButtonText: 'Simpan',
+//         cancelButtonText: 'Batal',
+//     }).then((result) => {
+//         /* Read more about isConfirmed, isDenied below */
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 url:"{{url('trxd2/update8')}}/"+id,
+//                 data:{
+//                     _method:"POST",
+//                     _token:"{{csrf_token()}}",
+//                     komponen_iks_detail:$("#komponen_iks_detail").val()
+//                 },
+//                 type:"POST",
+//                 dataType:"JSON",
+//                 success:function(data){
+//                     if(data.success == 1){
+//                         CustomSwal.fire('Sukses', data.msg, 'success');
+//                         // window.location.replace("{{ url('trx2') }}");
+//                         window.location.href="javascript:history.back()";
+//                     }else{
+//                         CustomSwal.fire('Gagal', data.msg, 'error');
+//                     }
+//                 },
+//                 error:function(error){
+//                     CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+//                     console.log(error.XMLHttpRequest);
+//                 }
+//             });
+//         }else{
+//         }
+//     });
+// }
 </script>
 @endpush
-

@@ -13,18 +13,18 @@ use App\Models\T_komponen_ikss_d;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class Trx2Controller extends Controller
+class TrxdController extends Controller
 {
     public function index(){
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Transaksi Komponen IKS';
-        $table_id = 't_komponen_ikss';
+        $subtitle = 'Detail Transaksi Komponen IKS';
+        $table_id = 't_komponen_ikss_d';
         return view('trx2',compact('subtitle','table_id','icon'));
     }
 
     public function listData(Request $request){
-        $data = T_komponen_iks::select(['id','iks_id','iks_gkomponen_id', 'group'])
-        ->with(['iks','gkomponen']);
+        $data = T_komponen_iks_d::select(['id','komponen_ikss_id','komponen_iks_detail'])
+        ->with(['tkomponen']);
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
@@ -40,7 +40,7 @@ class Trx2Controller extends Controller
     }
 
     public function deleteData(Request $request){
-        if(T_komponen_iks::destroy($request->id)){
+        if(T_komponen_iks_d::destroy($request->id)){
             $response = array('success'=>1,'msg'=>'Berhasil hapus data');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menghapus data');
@@ -51,78 +51,36 @@ class Trx2Controller extends Controller
     public function create(){
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Transaksi Komponen IKS ';
-        $iks = M_iks::all();
+        $tkomponen = T_komponen_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
         $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
+        return view('createDtrx2',compact('subtitle','icon', 'tkomponen' ,'gkomponen', 'gkomponen_d',  'dkomponen'));
     }
 
-    public function create8(Request $request){
-        $data = M_iks::find($request->id);
-        $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Transaksi Komponen IKS ';
-        $iks = M_iks::all();
-        $gkomponen = M_iks_gkomponen::all();
-        $gkomponen_d = M_iks_gkomponen_detail::all();
-        $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'data','gkomponen', 'gkomponen_d',  'dkomponen'));
-    }
-
-
-    // public function getdetail (request $request){
-    //     $gkomponen_id = $request->gkomponen_id;
-
-    //     $gkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $gkomponen_id)->get();
-    //     foreach ($gkomponen_detail as $gdetail){
-    //         echo "<option value='$gdetail->gkomponen_detail'> $gdetail->gkomponen_detail </option>";
-    //     }
-    // }
-
-    public function store(Request $request)
+     public function store(Request $request)
     {
 
 
-        if(T_komponen_iks::create($request->all())){
+        if(T_komponen_iks_d::create($request->all())){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
         }
         return $response;
-        // dd($request->all());die;
              
-        // $data = $request->all();
-        // $tkomponen = new T_komponen_iks(); 
-        // $tkomponen->iks_id = $data['iks_id'];
-        // $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
-        // $tkomponen->group = $data['group'];
-        // $tkomponen->save();
-        
-        // $dkomponen = new T_komponen_iks_d();
-        // $dkomponen->komponen_ikss_id=$tkomponen->id;
-        // $dkomponen->komponen_iks_detail = $data['komponen_iks_detail'];
-        // $dkomponen->save();
-
-        // if( ($request->all())){
-        //     $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
-        // }else{
-        //     $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
-        // }
-        // return $response;
-
-        
 
     }  
 
     public function edit(Request $request){
-        $data = T_komponen_iks::with('dkomponen')->find($request->id);
+        $data = T_komponen_iks_d::find($request->id);
         $icon = 'ni ni-dashlite';
         $subtitle = 'Edit Data Transaksi Komponen';
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
-        // $dkomponen = T_komponen_iks_d::all();
+        $dkomponen = T_komponen_iks::all();
         // $dkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $data->iks_gkomponen_id)->get();
-        return view('editTrx2',compact('subtitle','icon','data', 'iks', 'gkomponen'));
+        return view('editTrxd2',compact('subtitle','icon','data', 'iks', 'gkomponen'));
     }
 
     public function update(Request $request,  $id)
@@ -176,13 +134,13 @@ class Trx2Controller extends Controller
         $datatables = DataTables::of($data);
         return $datatables
                 ->addIndexColumn()
-                ->addColumn('aksi', function($data){
-                    $aksi = "";
-                    $aksi .= "<a title='Edit Data' href='/trxd2/".$data->id."/edit8' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
-                    $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
-                    return $aksi;
-                })
-                ->rawColumns(['aksi'])
+                // ->addColumn('aksi', function($data){
+                //     $aksi = "";
+                //     $aksi .= "<a title='Edit Data' href='/trx2/".$data->id."/edit7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
+                //     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
+                //     return $aksi;
+                // })
+                // ->rawColumns(['aksi'])
                 ->make(true);
             
     }
