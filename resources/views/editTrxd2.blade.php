@@ -67,14 +67,9 @@
 <form method="POST" action="/trxd2/update8/{{ $data->id }}" enctype="multipart/form-data">
     @csrf   
        
-        <div class="mb-3">
-            <label for="iks_gkomponen_id" class="form-label">Group Komponen</label>
-            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
-                <option disabled value="0">Pilih id Group Komponen</option>
-                @foreach ($gkomponen as $g)
-                  <option value="{{ $g->id }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
-                @endforeach
-              </select>
+     <div class="mb-3">
+            <label for="id" class="form-label">ID Detail Transaksi IKS</label>
+            <input name="id" type="text" class="form-control" id="id" aria-describedby="id" value="{{ $data['id'] }}">
         </div>
         <!-- <div class="mb-3">
             <label for="group" class="form-label">Group</label>
@@ -85,17 +80,18 @@
                 @endforeach
               </select>
         </div> -->
-        <input type="hidden" name="group" id="group" value="{{ $data->group }}" />
+        <!-- <input type="hidden" name="group" id="group" value="{{ $data->group }}" /> -->
 
 
         <div class="mb-3">
-            <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
-            <label for="gkomponen_detail" class="form-label">Detail Group Komponen</label>
+            <label for="komponen_iks_detail" class="form-label">Detail Transaksi IKS</label>
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail" value="{{ $data['komponen_iks_detail'] }}">
         </div>
+
+
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <!-- <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a> -->
+        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+        <a title='Tambah Data' href='javascript:void(0)' onclick='update(<?=$data->id ?>)' class='btn btn-primary'>Simpan</a>
 </form>
 
 @endsection
@@ -116,43 +112,43 @@ $('#iks_gkomponen_id').on('change',function(){
         
     })
 
-// function update(id){
-//     // buttonsmdisable(elm);
-//     CustomSwal.fire({
-//         icon:'question',
-//         text: 'Edit data '+$("#komponen_iks_detail").val()+' ?',
-//         showCancelButton: true,
-//         confirmButtonText: 'Simpan',
-//         cancelButtonText: 'Batal',
-//     }).then((result) => {
-//         /* Read more about isConfirmed, isDenied below */
-//         if (result.isConfirmed) {
-//             $.ajax({
-//                 url:"{{url('trxd2/update8')}}/"+id,
-//                 data:{
-//                     _method:"POST",
-//                     _token:"{{csrf_token()}}",
-//                     komponen_iks_detail:$("#komponen_iks_detail").val()
-//                 },
-//                 type:"POST",
-//                 dataType:"JSON",
-//                 success:function(data){
-//                     if(data.success == 1){
-//                         CustomSwal.fire('Sukses', data.msg, 'success');
-//                         // window.location.replace("{{ url('trx2') }}");
-//                         window.location.href="javascript:history.back()";
-//                     }else{
-//                         CustomSwal.fire('Gagal', data.msg, 'error');
-//                     }
-//                 },
-//                 error:function(error){
-//                     CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
-//                     console.log(error.XMLHttpRequest);
-//                 }
-//             });
-//         }else{
-//         }
-//     });
-// }
+function update(id){
+    // buttonsmdisable(elm);
+    CustomSwal.fire({
+        icon:'question',
+        text: 'Edit data '+$("#komponen_iks_detail").val()+' ?',
+        showCancelButton: true,
+        confirmButtonText: 'Simpan',
+        cancelButtonText: 'Batal',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $.ajax({
+                url:"{{url('trxd2/update8')}}/"+id,
+                data:{
+                    _method:"POST",
+                    _token:"{{csrf_token()}}",
+                    komponen_iks_detail:$("#komponen_iks_detail").val()
+                },
+                type:"POST",
+                dataType:"JSON",
+                success:function(data){
+                    if(data.success == 1){
+                        CustomSwal.fire('Sukses', data.msg, 'success').then(function() {
+                        window.location.href="javascript:history.back()";
+                        });
+                    }else{
+                        CustomSwal.fire('Gagal', data.msg, 'error');
+                    }
+                },
+                error:function(error){
+                    CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+                    console.log(error.XMLHttpRequest);
+                }
+            });
+        }else{
+        }
+    });
+}
 </script>
 @endpush
