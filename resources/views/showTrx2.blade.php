@@ -51,7 +51,7 @@
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
-                            <th width="10%">ID</th>
+                            <th width="10%">ID Detail Transaksi</th>
                             <th width="10%">ID Transaksi</th>
                             <th width="10%">Detail Transaksi</th>
                             <th width="10%">Aksi</th>
