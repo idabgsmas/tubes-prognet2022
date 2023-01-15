@@ -145,11 +145,10 @@ function store(){
                 dataType:"JSON",
                 success:function(data){
                     if(data.success == 1){
-                        CustomSwal.fire('Sukses', data.msg, 'success');
-                        // window.location.replace("{{ url('trx2') }}");
-                        // var url = '{{ route("crud.show", ":show1") }}';
-                        // url = url.replace(':show1', show1);
+                        CustomSwal.fire('Sukses', data.msg, 'success').then(function() {
                         window.location.href="javascript:history.back()";
+                        });
+                        // window.location.replace("{{ url('trx2') }}");
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
@@ -160,7 +159,7 @@ function store(){
                 }
             });
         }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+            // CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
             console.log(error.XMLHttpRequest);
         }
     });

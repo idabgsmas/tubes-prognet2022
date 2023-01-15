@@ -85,6 +85,14 @@ class TrxdController extends Controller
 
     public function update(Request $request,  $id)
     {
+        $data = T_komponen_iks_d::find($id);
+        if($data->fill($request->all())->save()) {
+            $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
+        } else {
+            $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
+        }
+        return $response;
+        // return redirect('crud')->with('success',"Data berhasil diedit!");
 
         // $tkomponen  = T_komponen_iks::with('dkomponen')->find($id);
         // $data=$request->all();
@@ -110,14 +118,7 @@ class TrxdController extends Controller
         // $dkomponen->save();
     
 
-        $data = T_komponen_iks::find($id);
-        if($data->fill($request->all())->save()) {
-            $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
-        } else {
-            $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
-        }
-        return $response;
-        return redirect('crud')->with('success',"Data berhasil diedit!");
+
     }
 
     public function indexShow(Request $request){

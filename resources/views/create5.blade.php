@@ -20,7 +20,7 @@
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDefault">Modal Default</button> -->
             <!-- <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalDefault"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
             <!-- <a href="javascript:void(0)" class="btn btn-sm btn-success" onclick="filtershow()"><em class="icon ti-file"></em> <span>Filter Data</span></a> -->
-            <a href="{{ route('crud4.list') }}" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
+            <a href="javascript:history.back()" class="btn btn-sm btn-primary" onclick="buttondisable(this)"><em class="icon fas fa-arrow-left"></em> <span>Kembali</span></a>
         </div>
     </div>
 </div>
@@ -110,8 +110,11 @@ function store(){
                 dataType:"JSON",
                 success:function(data){
                     if(data.success == 1){
-                        CustomSwal.fire('Sukses', data.msg, 'success');
-                        window.location.replace("{{ url('crud4') }}");
+                        CustomSwal.fire('Sukses', data.msg, 'success').then(function() {
+                            window.location.replace("{{ url('crud4') }}");
+                        });
+                        // CustomSwal.fire('Sukses', data.msg, 'success');
+                        // window.location.replace("{{ url('crud4') }}");
                     }else{
                         CustomSwal.fire('Gagal', data.msg, 'error');
                     }
@@ -122,7 +125,7 @@ function store(){
                 }
             });
         }else{
-            CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
+            // CustomSwal.fire('Gagal', 'terjadi kesalahan sistem', 'error');
             console.log(error.XMLHttpRequest);
         }
     });

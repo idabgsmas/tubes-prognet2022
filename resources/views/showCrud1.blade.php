@@ -22,7 +22,7 @@
 </div> 
 <div class="nk-fmg-body-head d-none d-lg-flex">
     <div class="nk-fmg-search">
-        <h4 class="card-title text-primary"><i class='{{$jam}}' data-toggle='tooltip' data-placement='bottom' title='Data {{$subtitle2}}'></i>  {{strtoupper($subtitle2  .$data->masa_berlaku_akhir .$data->status_aktif )}}</h4>
+        <h4 class="card-title text-primary"><i class='{{$jam}}' data-toggle='tooltip' data-placement='bottom' title='Data {{$subtitle2}}'></i>  {{strtoupper($subtitle2  .$data->masa_berlaku_akhir )}}</h4>
     </div>
 
 </div> 
@@ -57,9 +57,9 @@
                     <table id="{{$table_id}}" class="small-table table " style="width:100%">
                         <thead style="color:#526484; font-size:11px;" class="thead-light">
                             <th width="1%">No.</th>
-                            <th width="10%">Transaksi IKS</th>
-                            <th width="10%">IKS</th>
-                            <th width="10%">Group Komponen</th>
+                            <th width="10%">ID Transaksi</th>
+                            <th width="10%">ID IKS</th>
+                            <th width="10%">ID Group Komponen</th>
                             <th width="10%">Group </th>
                             <th width="10%">Aksi</th>
                         </thead>
