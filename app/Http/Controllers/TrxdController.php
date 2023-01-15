@@ -52,10 +52,8 @@ class TrxdController extends Controller
         $icon = 'ni ni-dashlite';
         $subtitle = 'Tambah Transaksi Komponen IKS ';
         $tkomponen = T_komponen_iks::all();
-        $gkomponen = M_iks_gkomponen::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
-        $dkomponen = T_komponen_iks_d::all();
-        return view('createDtrx2',compact('subtitle','icon', 'tkomponen' ,'gkomponen', 'gkomponen_d',  'dkomponen'));
+        return view('createDtrx2',compact('subtitle','icon', 'tkomponen', 'gkomponen_d'));
     }
 
      public function store(Request $request)
@@ -76,11 +74,10 @@ class TrxdController extends Controller
         $data = T_komponen_iks_d::find($request->id);
         $icon = 'ni ni-dashlite';
         $subtitle = 'Edit Data Transaksi Komponen';
-        $iks = M_iks::all();
-        $gkomponen = M_iks_gkomponen::all();
-        $dkomponen = T_komponen_iks::all();
+        $tkomponen = T_komponen_iks::all();
+        $gkomponen_d = M_iks_gkomponen_detail::all();
         // $dkomponen_detail = M_iks_gkomponen_detail::where('gkomponen_id', $data->iks_gkomponen_id)->get();
-        return view('editTrxd2',compact('subtitle','icon','data', 'iks', 'gkomponen'));
+        return view('editTrxd2',compact('subtitle','icon','data', 'tkomponen', 'gkomponen_d'));
     }
 
     public function update(Request $request,  $id)

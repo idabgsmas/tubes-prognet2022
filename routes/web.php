@@ -121,7 +121,7 @@ Route::get('/trx2/{id}/show7',[Trx2Controller::class,'indexShow'])->name('trx2.s
 Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.showList');
 Route::get('/trx2/detail-iks/{id}',[TrxdController::class, 'getDetailIKS']);
 
-// Routes untuk na,bah detail transaksi
+// Routes untuk nambah detail transaksi
 Route::get('/trx2/create8',[TrxdController::class,'create'])->name('trxd2.create2');
 Route::get('/trx2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit2');
 
@@ -145,3 +145,5 @@ Route::delete('/trxd2/{id}',[TrxdController::class,'deleteData'])->name('trxd2.d
 
 Route::get('/trxd2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit');
 Route::post('trxd2/update8/{id}',[TrxdController::class,'update'])->name('trxd2.update');
+
+Route::get('/trxd2/detail-iks/{id}',[TrxdController::class, 'getDetailIKS']);

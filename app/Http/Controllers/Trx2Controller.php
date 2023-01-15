@@ -81,22 +81,26 @@ class Trx2Controller extends Controller
 
     public function store(Request $request)
     {
-
-
+       
+        // $validate = $request->validate([
+        //     'iks_gkomponen_id' => 'required|unique:t_komponen_ikss,iks_gkomponen_id',
+        // ]); 
+        
         if(T_komponen_iks::create($request->all())){
             $response = array('success'=>1,'msg'=>'Data berhasil ditambahkan!');
         }else{
             $response = array('success'=>2,'msg'=>'Gagal menambahkan data!');
         }
         return $response;
-        // dd($request->all());die;
-             
+
+    
         // $data = $request->all();
         // $tkomponen = new T_komponen_iks(); 
         // $tkomponen->iks_id = $data['iks_id'];
         // $tkomponen->iks_gkomponen_id = $data['iks_gkomponen_id'];
         // $tkomponen->group = $data['group'];
         // $tkomponen->save();
+       
         
         // $dkomponen = new T_komponen_iks_d();
         // $dkomponen->komponen_ikss_id=$tkomponen->id;
@@ -110,7 +114,7 @@ class Trx2Controller extends Controller
         // }
         // return $response;
 
-        
+        // dd($request->all());die;
 
     }  
 
@@ -165,9 +169,10 @@ class Trx2Controller extends Controller
     public function indexShow(Request $request){
         $data = T_komponen_iks::find($request->id);
         $icon = 'ni ni-dashlite';
+        $subtitle2 = '  Group: ';
         $subtitle = 'Detail Transaksi Komponen IKS';
         $table_id = 't_komponen_ikss_d';
-        return view('showTrx2',compact('subtitle', 'data', 'table_id','icon'));
+        return view('showTrx2',compact('subtitle', 'subtitle2','data', 'table_id','icon'));
     }
 
     public function showList(Request $request){
