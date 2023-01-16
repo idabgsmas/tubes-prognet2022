@@ -86,7 +86,7 @@
             <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
                 <option selected disabled>Pilih Detail Group Komponen IKS</option>
                 @foreach ($gkomponen_d as $g)
-                  <option value="{{ $g->id }}">{{ $g->gkomponen_detail }}</option>
+                  <option value="{{ $g->gkomponen_detail }}">{{ $g->gkomponen_detail }}</option>
                 @endforeach
             </select>
             <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
