@@ -48,12 +48,13 @@ class TrxdController extends Controller
         return $response;
     }
 
-    public function create(){
+    public function create(Request $request){
+        $data = T_komponen_iks::find($request->id);
         $icon = 'ni ni-dashlite';
-        $subtitle = 'Tambah Transaksi Komponen IKS ';
+        $subtitle = 'Tambah Detail Transaksi Komponen IKS ';
         $tkomponen = T_komponen_iks::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
-        return view('createDtrx2',compact('subtitle','icon', 'tkomponen', 'gkomponen_d'));
+        return view('createDtrx2',compact('subtitle','icon','data' , 'tkomponen', 'gkomponen_d'));
     }
 
      public function store(Request $request)

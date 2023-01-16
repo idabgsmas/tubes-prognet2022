@@ -67,7 +67,7 @@
 <form method="POST" action="/trxd2/store8" enctype="multipart/form-data">
     @csrf
        
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="komponen_ikss_id" class="form-label">ID Transaksi IKS</label>
             <select class="custom-select" id="komponen_ikss_id" name="komponen_ikss_id" aria-describedby="komponen_ikss_id" required>
                 <option selected disabled>Transaksi Komponen IKS</option>
@@ -75,7 +75,11 @@
                   <option value="{{ $t->id }}">{{ $t->id }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
+        <div class="mb-3">
+            <label for="komponen_ikss_id" class="form-label">ID IKS</label>
+            <input name="komponen_ikss_id" type="text" class="form-control" id="komponen_ikss_id" aria-describedby="komponen_ikss_id" value="{{ $data['id'] }}">
+         </div>
 
         <div class="mb-3">
             <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>

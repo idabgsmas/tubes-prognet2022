@@ -77,15 +77,19 @@
 
 <form method="POST" action="/trx2/store7" enctype="multipart/form-data">
     @csrf
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="iks_id" class="form-label">IKS</label>
             <select class="custom-select" id="iks_id" name="iks_id" aria-describedby="iks_id" required>
             <option selected disabled>Pilih IKS</option>
                 @foreach ($iks as $i)
-                  <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                  <option value="{{ $i->iks_id }}">{{ $i->nama }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
+        <div class="mb-3">
+            <label for="iks_id" class="form-label">ID IKS</label>
+            <input name="iks_id" type="text" class="form-control" id="iks_id" aria-describedby="iks_id" value="{{ $data['id'] }}">
+         </div>
         <!-- <div class="mb-3">
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
         </div> -->
@@ -116,9 +120,9 @@
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
         </div> -->
 
-        <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+        <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="reset" class="btn btn-danger">Kosongkan</button> 
-        <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a>
+        <!-- <a title='Tambah Data' href='javascript:void(0)' onclick='store("","")' class='btn btn-success'>Simpan</a> -->
 </form>
 @endsection
 @push('script')

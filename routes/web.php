@@ -134,12 +134,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/trx2/showList7',[Trx2Controller:: class,'showList'])->name('trx2.showList');
     Route::get('/trx2/detail-iks/{id}',[TrxdController::class, 'getDetailIKS']);
     
-    // Routes untuk na,bah detail transaksi
-    Route::get('/trx2/create8',[TrxdController::class,'create'])->name('trxd2.create2');
-    Route::get('/trx2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit2');
-    
-    
-    Route::get('/trx2/create7',[Trx2Controller::class,'create'])->name('trx2.create');
+    Route::get('/trx2/{id}/create7',[Trx2Controller::class,'create8'])->name('trx2.create');
     Route::post('/trx2/store7',[Trx2Controller::class,'store'])->name('trx2.store');
     
     Route::get('/trx2/{id}/edit7',[Trx2Controller::class,'edit'])->name('trx2.edit');
@@ -151,7 +146,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     // Routes Detail Transaksi
     
-    Route::get('/trxd2/create8',[TrxdController::class,'create'])->name('trxd2.create');
+    Route::get('/trxd2/{id}/create8',[TrxdController::class,'create'])->name('trxd2.create');
     Route::post('/trxd2/store8',[TrxdController::class,'store'])->name('trxd2.store');
     
     Route::delete('/trxd2/{id}',[TrxdController::class,'deleteData'])->name('trxd2.delete');

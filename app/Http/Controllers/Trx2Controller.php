@@ -54,8 +54,7 @@ class Trx2Controller extends Controller
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
-        $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d',  'dkomponen'));
+        return view('createTrx2',compact('subtitle','icon','iks', 'gkomponen', 'gkomponen_d'));
     }
 
     public function create8(Request $request){
@@ -65,8 +64,7 @@ class Trx2Controller extends Controller
         $iks = M_iks::all();
         $gkomponen = M_iks_gkomponen::all();
         $gkomponen_d = M_iks_gkomponen_detail::all();
-        $dkomponen = T_komponen_iks_d::all();
-        return view('createTrx2',compact('subtitle','icon','iks', 'data','gkomponen', 'gkomponen_d',  'dkomponen'));
+        return view('createTrx2',compact('subtitle','icon','iks', 'data','gkomponen', 'gkomponen_d'));
     }
 
 
@@ -183,6 +181,7 @@ class Trx2Controller extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
+                    $aksi .= "<a title='Add Data Detail Transaksi IKS' href='/trxd2/".$data->komponen_ikss_id."/create8' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-plus' ></i></a>";
                     $aksi .= "<a title='Edit Data' href='/trxd2/".$data->id."/edit8' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-pencil' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;

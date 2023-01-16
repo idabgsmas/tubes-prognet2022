@@ -121,6 +121,7 @@ class CrudController extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function($data){
                     $aksi = "";
+                    $aksi .= "<a title='Add Data Transaksi IKS' href='/trx2/".$data->iks_id."/create7' class='btn btn-md btn-success' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-plus' ></i></a>";
                     $aksi .= "<a title='Detail Data Transaksi' href='/trx2/".$data->id."/show7' class='btn btn-md btn-primary' data-toggle='tooltip' data-placement='bottom' onclick='buttonsmdisable(this)'><i class='ti-search' ></i></a>";
                     $aksi .= "<a title='Delete Data' href='javascript:void(0)' onclick='deleteData(\"{$data->id}\",this)' class='btn btn-md btn-danger' data-id='{$data->id}' ><i class='ti-trash' data-toggle='tooltip' data-placement='bottom' ></i></a> ";
                     return $aksi;
