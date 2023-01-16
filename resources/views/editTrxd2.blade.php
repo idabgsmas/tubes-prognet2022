@@ -68,25 +68,25 @@
     @csrf   
        
      <div class="mb-3">
-            <label for="id" class="form-label">ID Detail Transaksi IKS</label>
+            <label for="id" class="form-label">ID Transaksi IKS</label>
             <input name="id" type="text" class="form-control" id="id" aria-describedby="id" value="{{ $data['id'] }}">
         </div>
-        <!-- <div class="mb-3">
-            <label for="group" class="form-label">Group</label>
-            <select class="custom-select" id="group" name="group" aria-describedby="group" required>
-                <option disabled value="0">Pilih id Group Komponen</option>
-                @foreach ($gkomponen as $g)
-                  <option value="{{ $g->group }}" @if($data->iks_gkomponen_id===$g->id) SELECTED @endif>{{ $g->group }}</option>
+        <div class="mb-3">
+            <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
+            <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
+                <option value="0" disabled>Pilih Jaminan</option>
+                @foreach ($gkomponen_d as $g)
+                  <option value="{{ $g->id }}" @if($data->komponen_iks_detail===$g->id) SELECTED @endif>{{ $g->gkomponen_detail }}</option>
                 @endforeach
-              </select>
-        </div> -->
+            </select>
+        </div>
         <!-- <input type="hidden" name="group" id="group" value="{{ $data->group }}" /> -->
 
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="komponen_iks_detail" class="form-label">Detail Transaksi IKS</label>
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail" value="{{ $data['komponen_iks_detail'] }}">
-        </div>
+        </div> -->
 
 
         <button type="reset" class="btn btn-danger">Kosongkan</button> 

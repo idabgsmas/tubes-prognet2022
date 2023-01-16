@@ -15,4 +15,6 @@ class T_komponen_iks_d extends Model
     {
         return $this->belongsTo('App\Models\T_komponen_iks','komponen_ikss_id','id');
     }
+
+
 }

@@ -68,7 +68,7 @@
     @csrf
        
         <div class="mb-3">
-            <label for="komponen_ikss_id" class="form-label">Transaksi IKS</label>
+            <label for="komponen_ikss_id" class="form-label">ID Transaksi IKS</label>
             <select class="custom-select" id="komponen_ikss_id" name="komponen_ikss_id" aria-describedby="komponen_ikss_id" required>
                 <option selected disabled>Transaksi Komponen IKS</option>
                 @foreach ($tkomponen as $t)
@@ -76,12 +76,16 @@
                 @endforeach
             </select>
         </div>
+
         <div class="mb-3">
             <label for="komponen_iks_detail" class="form-label">Detail Group Komponen</label>
-            <!-- <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
-                <option disabled>Pilih Detail Group Komponen IKS</option>
-            </select> -->
-            <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
+            <select class="custom-select" id="komponen_iks_detail" name="komponen_iks_detail" aria-describedby="komponen_iks_detail" required>
+                <option selected disabled>Pilih Detail Group Komponen IKS</option>
+                @foreach ($gkomponen_d as $g)
+                  <option value="{{ $g->id }}">{{ $g->gkomponen_detail }}</option>
+                @endforeach
+            </select>
+            <!-- <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail"> -->
         </div>
 
         <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
@@ -145,9 +149,9 @@ function store(){
 
 $(function() {
     
-    $('#iks_gkomponen_id').on('change',function(){
+    
         $('#komponen_iks_detail').val($('#iks_gkomponen_id option:selected').text());
-        $('#komponen_iks_detail').empty();
+        // $('#komponen_iks_detail').empty();
         $.get("{{ url('trxd2/detail-iks') }}/" + $('#iks_gkomponen_id option:selected').val(), function(data, status){
             $.each(JSON.parse(data), function(key, val){
                 $('#komponen_iks_detail').append($('<option>', { 
@@ -157,7 +161,7 @@ $(function() {
             })
         });
         
-    })
+    
 })
 
 </script>

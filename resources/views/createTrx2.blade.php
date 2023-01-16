@@ -64,6 +64,17 @@
         </div>
     </div>
 <!-- </div> -->
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form method="POST" action="/trx2/store7" enctype="multipart/form-data">
     @csrf
         <div class="mb-3">
@@ -75,14 +86,12 @@
                 @endforeach
             </select>
         </div>
-
-
         <!-- <div class="mb-3">
             <input name="komponen_iks_detail" type="text" class="form-control" id="komponen_iks_detail" aria-describedby="komponen_iks_detail">
         </div> -->
         <div class="mb-3">
             <label for="iks_gkomponen_id" class="form-label">ID Group Komponen IKS</label>
-            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required>
+            <select class="custom-select" id="iks_gkomponen_id" name="iks_gkomponen_id" aria-describedby="iks_gkomponen_id" required autofocus>
                 <option selected disabled>Pilih Group Komponen IKS</option>
                 @foreach ($gkomponen as $g)
                   <option value="{{ $g->id }}">{{ $g->group }}</option>

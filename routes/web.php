@@ -158,6 +158,9 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('/trxd2/{id}/edit8',[TrxdController::class,'edit'])->name('trxd2.edit');
     Route::post('trxd2/update8/{id}',[TrxdController::class,'update'])->name('trxd2.update');
+
+    Route::get('/trxd2/detail-iks/{id}',[TrxdController::class, 'getDetailIKS']);
+
 });
 
 
