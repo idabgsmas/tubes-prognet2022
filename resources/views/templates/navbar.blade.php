@@ -27,6 +27,7 @@
         </div><!-- .nk-header-news -->
         <div class="nk-header-tools">
             <ul class="nk-quick-nav">
+                @auth
                 <li class="dropdown language-dropdown d-none d-sm-block mr-n1">
                     <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
                         <div class="quick-icon border border-light">
@@ -74,11 +75,11 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>substr(auth()->user()->name, 0, 1)</span>
+                                        <span>{{ Str::limit(Auth::guard('web')->user()->name, 15) }}</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">auth()->user()->name</span>
-                                        <span class="sub-text">auth()->user()->email</span>
+                                        <span class="lead-text">{{ Auth::guard('web')->user()->name }}</span>
+                                        <span class="sub-text">{{ Auth::guard('web')->user()->email }}</span>
                                     </div>
                                     <div class="user-action">
                                         <a class="btn btn-icon mr-n2" href="html/user-profile-setting.html"><em class="icon ni ni-setting"></em></a>
@@ -89,9 +90,11 @@
                                 <h6 class="overline-title-alt">Role Active</h6>
                                 <div class="form-group">
                                     <select class="form-control select2" name="user_role" id="user_role">
-                                        {{-- @foreach (session('roles') as $role)
+                                    {{ Auth::guard('web')->user()->email }}
+                                    <option value="{{ Auth::guard('web')->user()->level }}" >{{ Auth::guard('web')->user()->level }}</option>    
+                                    <!-- {{-- @foreach (session('roles') as $role)
                                             <option value="{{$role['role_id']}}" {{(session('role_active')['role_id'] == $role['role_id'] ? 'selected':'')}}>{{$role['role_name']}}</option>
-                                        @endforeach --}}
+                                        @endforeach --}} -->
                                     </select>
                                 </div>    
                             </div>
@@ -119,6 +122,7 @@
                             </div>
                         </div>
                     </li><!-- .dropdown -->
+                    @endauth
                 
             </ul><!-- .nk-quick-nav -->
         </div><!-- .nk-header-tools -->
